@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "task_type")
+@Table(name = "task_types")
 public class TaskType extends DbEntity {
 
     @Column(name = "name")

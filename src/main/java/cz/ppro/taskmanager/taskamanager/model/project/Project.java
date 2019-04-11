@@ -1,28 +1,36 @@
 package cz.ppro.taskmanager.taskamanager.model.project;
 
 import cz.ppro.taskmanager.taskamanager.model.DbEntity;
+import cz.ppro.taskmanager.taskamanager.model.user.User;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "project")
+@Table(name = "projects")
 public class Project extends DbEntity {
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "manager_id")
-    private long managerId;
-
     @Column(name = "created")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created;
 
-    public Project(String name, long managerId, Date created) {
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private User manager;
+
+    @ManyToMany
+    @JoinTable(name = "users_projects",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> usersInProject;
+
+    public Project(String name, Date created) {
         this.name = name;
-        this.managerId = managerId;
         this.created = created;
     }
 
@@ -34,13 +42,6 @@ public class Project extends DbEntity {
         this.name = name;
     }
 
-    public long getManagerId() {
-        return managerId;
-    }
-
-    public void setManagerId(long managerId) {
-        this.managerId = managerId;
-    }
 
     public Date getCreated() {
         return created;
@@ -48,5 +49,21 @@ public class Project extends DbEntity {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    public User getManager() {
+        return manager;
+    }
+
+    public void setManager(User manager) {
+        this.manager = manager;
+    }
+
+    public Set<User> getUsersInProject() {
+        return usersInProject;
+    }
+
+    public void setUsersInProject(Set<User> usersInProject) {
+        this.usersInProject = usersInProject;
     }
 }

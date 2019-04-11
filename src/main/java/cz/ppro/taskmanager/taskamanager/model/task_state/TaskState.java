@@ -1,4 +1,4 @@
-package cz.ppro.taskmanager.taskamanager.model.priority;
+package cz.ppro.taskmanager.taskamanager.model.task_state;
 
 import cz.ppro.taskmanager.taskamanager.model.DbEntity;
 
@@ -7,13 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "project")
-public class Priority extends DbEntity {
+@Table(name = "task_states")
+public class TaskState extends DbEntity {
 
     @Column(name = "name")
     private String name;
 
-    public Priority(String name) {
+    public TaskState(String name) {
         this.name = name;
     }
 

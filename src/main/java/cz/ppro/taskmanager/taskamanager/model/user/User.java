@@ -1,13 +1,16 @@
 package cz.ppro.taskmanager.taskamanager.model.user;
 
 import cz.ppro.taskmanager.taskamanager.model.DbEntity;
+import cz.ppro.taskmanager.taskamanager.model.project.Project;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.Set;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 public class User extends DbEntity {
 
     @Column(name = "first_name")
@@ -22,7 +25,8 @@ public class User extends DbEntity {
     @Column(name = "password")
     private String password;
 
-    //TODO: dodelat cizi klice
+    @ManyToMany(mappedBy = "usersInProject")
+    Set<Project> projects;
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
@@ -61,5 +65,13 @@ public class User extends DbEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }
