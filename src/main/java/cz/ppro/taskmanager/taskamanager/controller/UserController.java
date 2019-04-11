@@ -5,8 +5,6 @@ import cz.ppro.taskmanager.taskamanager.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.awt.print.Pageable;
 import java.util.Collection;
 
 @RestController
@@ -19,8 +17,11 @@ public class UserController {
         this.userRepository =  userRepository;
     }
 
-    @RequestMapping("/findPayments")
-    public Collection<User> getUsers(Pageable pageable){
+    @RequestMapping("/findUsers")
+    public Collection<User> getUsers(){
+
+        Collection col = userRepository.findAll();
+        int a = 1;
 
         return userRepository.findAll();
     }

@@ -1,11 +1,11 @@
+DROP TABLE users_projects IF EXISTS;
+DROP TABLE projects IF EXISTS;
+DROP TABLE task_history IF EXISTS;
+DROP TABLE tasks IF EXISTS;
 DROP TABLE task_types IF EXISTS;
 DROP TABLE task_states IF EXISTS;
 DROP TABLE task_priorities IF EXISTS;
-DROP TABLE task_history IF EXISTS;
-DROP TABLE projects IF EXISTS;
 DROP TABLE users IF EXISTS;
-DROP TABLE tasks IF EXISTS;
-DROP TABLE users_projects IF EXISTS;
 
 --**************************************************************************************
 CREATE TABLE task_types
@@ -49,7 +49,7 @@ CREATE TABLE projects
 );
 
 ALTER TABLE projects
-  ADD CONSTRAINT fk_users FOREIGN KEY (manager_id) REFERENCES users (id);
+  ADD CONSTRAINT fk_users_from_project FOREIGN KEY (manager_id) REFERENCES users (id);
 
 --**************************************************************************************
 CREATE TABLE tasks
@@ -66,7 +66,7 @@ CREATE TABLE tasks
 );
 
 ALTER TABLE tasks
-  ADD CONSTRAINT fk_users FOREIGN KEY (assigned_user_id) REFERENCES users (id);
+  ADD CONSTRAINT fk_users_from_tasks FOREIGN KEY (assigned_user_id) REFERENCES users (id);
 ALTER TABLE tasks
   ADD CONSTRAINT fk_projects FOREIGN KEY (project_id) REFERENCES projects (id);
 ALTER TABLE tasks
@@ -89,7 +89,7 @@ CREATE TABLE task_history
 ALTER TABLE task_history
   ADD CONSTRAINT fk_tasks FOREIGN KEY (task_id) REFERENCES tasks (id);
 ALTER TABLE task_history
-  ADD CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES users (id);
+  ADD CONSTRAINT fk_users_from_history FOREIGN KEY (user_id) REFERENCES users (id);
 
 --**************************************************************************************
 CREATE TABLE users_projects
@@ -99,7 +99,7 @@ CREATE TABLE users_projects
 );
 
 ALTER TABLE users_projects
-  ADD CONSTRAINT fk_users FOREIGN KEY (user_id) REFERENCES users (id);
+  ADD CONSTRAINT fk_users_from_project FOREIGN KEY (user_id) REFERENCES users (id);
 ALTER TABLE users_projects
   ADD CONSTRAINT fk_projects FOREIGN KEY (project_id) REFERENCES projects (id);
 
