@@ -1,27 +1,27 @@
 package cz.ppro.taskmanager.taskamanager.controller;
 
 import cz.ppro.taskmanager.taskamanager.model.user.User;
-import cz.ppro.taskmanager.taskamanager.model.user.UserService;
+import cz.ppro.taskmanager.taskamanager.model.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.print.Pageable;
+import java.util.Collection;
 
 @RestController
 public class UserController {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    UserController(UserService userService){
-        this.userService =  userService;
+    UserController(UserRepository userRepository){
+        this.userRepository =  userRepository;
     }
 
     @RequestMapping("/findPayments")
-    public Page<User> getUsers(Pageable pageable){
+    public Collection<User> getUsers(Pageable pageable){
 
-        return userService.getByLastName("login",pageable);
+        return userRepository.findAll();
     }
 }

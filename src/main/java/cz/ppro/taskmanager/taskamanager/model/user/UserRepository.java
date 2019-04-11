@@ -1,11 +1,10 @@
 package cz.ppro.taskmanager.taskamanager.model.user;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.Repository;
 
-import java.awt.print.Pageable;
+import java.util.Collection;
 
 
-public interface UserRepository extends PagingAndSortingRepository<User, Long> {
-    Page<User> findAllByLastName(String lastName, Pageable pageable);
+public interface UserRepository extends Repository<User, Integer> {
+    Collection<User> findAll();
 }
