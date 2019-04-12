@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {Login} from './pages/Login';
-import {Error} from "./pages/Error";
-import {Navigation} from "./Navigation";
+import {Login} from './components/authorization/Login';
+import {Error} from "./components/Error";
+import {Navigation} from "./components/navigation/Navigation";
 import './App.css';
 
 class App extends Component {
