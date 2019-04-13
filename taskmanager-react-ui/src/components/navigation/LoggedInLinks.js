@@ -6,7 +6,10 @@ const LoggedInLinks = () => {
     return (
         <ul className='right'>
             <li>
-                <NavLink to='/projects'> Projects </NavLink>
+                <NavLink to='/project/index'> Projects </NavLink>
+            </li>
+            <li>
+                <NavLink to='/task/index'> Tasks </NavLink>
             </li>
             <li>
                 <NavLink to='/tasks'> Tasks </NavLink>
