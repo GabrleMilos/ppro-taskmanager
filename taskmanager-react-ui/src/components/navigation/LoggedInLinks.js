@@ -6,19 +6,22 @@ const LoggedInLinks = () => {
     return (
         <ul className='right'>
             <li>
+                <NavLink to='/task/new'> New Task </NavLink>
+            </li>
+            <li>
+                <NavLink to='/project/new'> New Project </NavLink>
+            </li>
+            <li>
                 <NavLink to='/project/index'> Projects </NavLink>
             </li>
             <li>
                 <NavLink to='/task/index'> Tasks </NavLink>
             </li>
             <li>
-                <NavLink to='/tasks'> Tasks </NavLink>
+                <NavLink to='/'> Log out </NavLink>
             </li>
             <li>
-                <NavLink> Log out </NavLink>
-            </li>
-            <li>
-                <NavLink className="btn btn-floating pink lighten-1"> NN</NavLink>
+                <NavLink to='/' className="btn btn-floating pink lighten-1"> NN</NavLink>
             </li>
         </ul>
     );

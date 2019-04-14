@@ -18,10 +18,10 @@ export class NewProject extends Component {
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className='white'>
-                    <h5 className="grey-text text-darken-3">Project</h5>
+                    <h5 className="grey-text text-darken-3">Add project</h5>
                     <div className="input-field">
                         <label htmlFor='projectName'>Project name</label>
-                        <input id='projectName' type='email' onChange={this.handleChange}/>
+                        <input id='projectName' type='text' onChange={this.handleChange}/>
                     </div>
 
                     <div className="input-field">

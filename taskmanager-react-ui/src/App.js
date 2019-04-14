@@ -5,8 +5,14 @@ import {Login} from "./components/authentication/Login";
 import {Register} from "./components/authentication/Register";
 import {ProjectList} from"./components/project/ProjectList"
 import {TaskList} from"./components/task/TaskList"
-
+import {NewTask} from "./components/task/NewTask";
+import {NewProject} from "./components/project/NewProject";
+import M from "materialize-css";
 class App extends Component {
+    componentDidMount() {
+        // Auto initialize all the things!
+        M.AutoInit();
+    }
     render() {
         return (
             <Router>
@@ -16,6 +22,8 @@ class App extends Component {
                     <Route path='/register' component={Register}/>
                     <Route path='/project/index' component={ProjectList}/>
                     <Route path='/task/index' component={TaskList}/>
+                    <Route path='/task/new' component={NewTask}/>
+                    <Route path='/project/new' component={NewProject}/>
                 </Switch>
             </Router>
         );
