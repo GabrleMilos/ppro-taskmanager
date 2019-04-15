@@ -16,13 +16,14 @@ class App extends Component {
             <Router>
                 <Navbar/>
                 <Switch>
+                    {/*ACCOUNT routes*/}
                     <Route path='/login' component={Login}/>
                     <Route path='/register' component={Register}/>
-
+                    {/*TASK routes*/}
                     <Route path='/task/index' component={TaskList}/>
                     <Route path='/task/new' component={NewTask}/>
                     <Route path='/task/update' component={UpdateTask}/>
-
+                    {/*PROJECT routes*/}
                     <Route path='/project/index' component={ProjectList}/>
                     <Route path='/project/new' component={NewProject}/>
                     <Route path='/project/update' component={UpdateProject}/>
