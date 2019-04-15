@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import M from "materialize-css";
 
-export class NewTask extends Component {
+export class UpdateTask extends Component {
     state = {
         taskName: '',
         taskDescription: '',
@@ -14,7 +14,6 @@ export class NewTask extends Component {
         states: [{id: 1, name: "New"}, {id: 2, name: "In development"}, {id: 3, name: "Finished"}],
         priorities: [{id: 1, name: "Immediate"}, {id: 2, name: "Normal"}, {id: 3, name: "Low"}]
     };
-
     componentDidMount() {
         // Auto initialize all the things!
         M.AutoInit();
@@ -34,7 +33,7 @@ export class NewTask extends Component {
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className='white'>
-                    <h5 className="grey-text text-darken-3">Add task</h5>
+                    <h5 className="grey-text text-darken-3">Update task</h5>
                     <div className="input-field">
                         <label htmlFor='taskName'>Task name</label>
                         <input id='taskName' type='text' onChange={this.handleChange}/>
@@ -77,7 +76,7 @@ export class NewTask extends Component {
 
 
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Add task to project</button>
+                        <button className="btn pink lighten-1 z-depth-0">Update task</button>
                     </div>
                 </form>
             </div>
