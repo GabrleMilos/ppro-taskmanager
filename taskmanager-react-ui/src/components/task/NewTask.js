@@ -3,9 +3,15 @@ import React, {Component} from 'react';
 export class NewTask extends Component {
     state = {
         taskName: '',
-        taskDescription:'',
-        assignedUser:'',
-        users: [{id: 1, name: "User 1"}, {id: 2, name: "User 2"}]
+        taskDescription: '',
+        assignedUser: '',
+        taskState: '',
+        taskAssignedUser: '',
+        projectId: '',
+        priorityId: '',
+        users: [{id: 1, name: "User 1"}, {id: 2, name: "User 2"}],
+        states: [{id: 1, name: "New"}, {id: 2, name: "In development"}, {id: 3, name: "Finished"}],
+        priorities: [{id: 1, name: "Immediate"}, {id: 2, name: "Normal"}, {id: 3, name: "Low"}]
     };
     handleChange = (e) => {
         this.setState({
@@ -33,12 +39,33 @@ export class NewTask extends Component {
 
 
                     <div className="input-field">
-                        <select id='taskAssignedUser'>
-                            <option value="-1">Assign to user</option>
+                        <select id='taskAssignedUser' onChange={this.handleChange}>
+                            <option value="-1">Select user</option>
                             {this.state.users.map(user => (
                                 <option value={user.id} key={user.id}>{user.name}</option>
                             ))}
                         </select>
+                        <label>Assigned user</label>
+                    </div>
+
+                    <div className="input-field">
+                        <select id='taskState' onChange={this.handleChange}>
+                            <option value="-1">Select state</option>
+                            {this.state.states.map(state => (
+                                <option value={state.id} key={state.id}>{state.name}</option>
+                            ))}
+                        </select>
+                        <label>Task state</label>
+                    </div>
+
+                    <div className="input-field">
+                        <select id='taskPriority' onChange={this.handleChange}>
+                            <option value="-1">Select priority</option>
+                            {this.state.priorities.map(priority => (
+                                <option value={priority.id} key={priority.id}>{priority.name}</option>
+                            ))}
+                        </select>
+                        <label>Task state</label>
                     </div>
 
 
