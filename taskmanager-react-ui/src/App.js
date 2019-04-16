@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Navbar from "./components/navigation/Navbar";
 import {Login} from "./components/authentication/Login";
 import {Register} from "./components/authentication/Register";
-import ProjectList from"./components/project/ProjectList"
+import {ProjectList} from"./components/project/ProjectList"
 import {TaskList} from"./components/task/TaskList"
 import {NewTask} from "./components/task/NewTask";
 import {NewProject} from "./components/project/NewProject";
