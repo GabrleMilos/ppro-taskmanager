@@ -10,6 +10,7 @@ export class TaskTable extends Component {
     }
 
     render() {
+        const {tasks} = this.props;
         return (
             <table className='striped'>
                 <thead>
@@ -25,7 +26,17 @@ export class TaskTable extends Component {
                 </thead>
 
                 <tbody>
-
+                {tasks && tasks.map(task =>
+                    <tr key={task.id}>
+                        <td>{task.name}</td>
+                        <td>{task.created}</td>
+                        <td>{task.assignedTo}</td>
+                        <td>{task.project}</td>
+                        <td>{task.priority}</td>
+                        <td>{task.state}</td>
+                        <td>{task.type}</td>
+                    </tr>
+                )}
 
                 </tbody>
             </table>
