@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Navbar from "./components/navigation/Navbar";
+import {Navbar} from "./components/navigation/Navbar";
 import {Login} from "./components/authentication/Login";
 import {Register} from "./components/authentication/Register";
 import {ProjectList} from"./components/project/ProjectList"
@@ -14,7 +14,7 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Navbar/>
+                <Navbar {...this.props}/>
                 <Switch>
                     {/*ACCOUNT routes*/}
                     <Route path='/login' component={Login}/>

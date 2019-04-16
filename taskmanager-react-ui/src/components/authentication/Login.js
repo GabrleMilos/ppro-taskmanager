@@ -12,7 +12,15 @@ export class Login extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        this.loginUser();
+
+    }
+    async loginUser(){
+        // const responseDetail = await fetch('http://localhost:8080/user/login/' + this.state.email + '/' + this.state.password);
+        // const userAsyncResponse = await responseDetail.json();
+        const userAsyncResponse = {id:'1', firstName:'peter', lastName:'panda',email:this.state.email,password:this.state.password};
+        localStorage.setItem('loggedInUser',JSON.stringify(userAsyncResponse));
+        this.props.history.push("/task/index");
     }
 
     render() {
