@@ -14,7 +14,11 @@ class App extends Component {
     render() {
         return (
             <Router>
-                <Navbar {...this.props}/>
+                <Switch>
+                    <Route path='/register' render={(props) => <Navbar loggedInUser={false}/>}/>
+                    <Route path='/login' render={(props) => <Navbar loggedInUser={false}/>}/>
+                    <Route path='/' render={(props) => <Navbar loggedInUser={true}/>}/>
+                </Switch>
                 <Switch>
                     {/*ACCOUNT routes*/}
                     <Route path='/login' component={Login}/>
@@ -34,3 +38,6 @@ class App extends Component {
 }
 
 export default App;
+
+
+

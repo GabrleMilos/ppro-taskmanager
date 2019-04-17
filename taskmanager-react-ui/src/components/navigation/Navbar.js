@@ -5,9 +5,10 @@ import {LoggedOffLinks} from './LoggedOffLinks'
 
 export class Navbar extends Component {
     render() {
-
-        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-        const links = loggedInUser ? <LoggedInLinks/> : <LoggedOffLinks/>;
+        const loggedInUser = this.props.loggedInUser;
+            // const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+        const
+        links = loggedInUser ? <LoggedInLinks/> : <LoggedOffLinks/>;
         return (
             <nav className="grey darken-3">
                 <div className="container nav-wrapper">

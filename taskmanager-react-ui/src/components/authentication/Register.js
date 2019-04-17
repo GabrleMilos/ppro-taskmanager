@@ -7,6 +7,11 @@ export class Register extends Component {
         fistName:'',
         lastName:''
     };
+
+    componentDidMount() {
+        localStorage.removeItem('loggedInUser');
+    }
+
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value

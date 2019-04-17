@@ -23,6 +23,10 @@ export class Login extends Component {
         this.props.history.push("/task/index");
     }
 
+    componentDidMount() {
+        localStorage.removeItem('loggedInUser');
+    }
+
     render() {
         return (
             <div className="container">
