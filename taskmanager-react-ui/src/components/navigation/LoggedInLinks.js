@@ -30,8 +30,7 @@ export class LoggedInLinks extends Component {
     }
 
     handleLogOut = (e) => {
-        localStorage.removeItem('loggedInUser');
-        this.props.history.push("/task/index");
+        this.props.history.push("/login");
     }
 }
 

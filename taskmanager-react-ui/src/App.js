@@ -15,9 +15,9 @@ class App extends Component {
         return (
             <Router>
                 <Switch>
-                    <Route path='/register' render={(props) => <Navbar loggedInUser={false}/>}/>
-                    <Route path='/login' render={(props) => <Navbar loggedInUser={false}/>}/>
-                    <Route path='/' render={(props) => <Navbar loggedInUser={true}/>}/>
+                    <Route path='/register' render={(props) => <Navbar loggedInUser={false} history={props.history}/>}/>
+                    <Route path='/login' render={(props) => <Navbar loggedInUser={false} history={props.history}/>}/>
+                    <Route path='/' render={(props) => <Navbar loggedInUser={true} history={props.history}/>}/>
                 </Switch>
                 <Switch>
                     {/*ACCOUNT routes*/}

@@ -8,7 +8,7 @@ export class Navbar extends Component {
         const loggedInUser = this.props.loggedInUser;
             // const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
         const
-        links = loggedInUser ? <LoggedInLinks/> : <LoggedOffLinks/>;
+        links = loggedInUser ? <LoggedInLinks history={this.props.history}/> : <LoggedOffLinks/>;
         return (
             <nav className="grey darken-3">
                 <div className="container nav-wrapper">
