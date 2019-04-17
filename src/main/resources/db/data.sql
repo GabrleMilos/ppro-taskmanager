@@ -40,7 +40,6 @@ INSERT INTO task_history VALUES (1,'user changed task_priority of task to Immedi
 -- user_id, project_id
 INSERT INTO users_projects VALUES (1,1);
 INSERT INTO users_projects VALUES (1,2);
-INSERT INTO users_projects VALUES (1,3);
 INSERT INTO users_projects VALUES (2,1);
 INSERT INTO users_projects VALUES (2,2);
 

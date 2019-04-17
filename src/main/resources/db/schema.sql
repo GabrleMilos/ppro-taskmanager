@@ -99,8 +99,8 @@ CREATE TABLE users_projects
 );
 
 ALTER TABLE users_projects
-  ADD CONSTRAINT fk_users_from_project FOREIGN KEY (user_id) REFERENCES users (id);
+  ADD CONSTRAINT fk_users_from_user_project FOREIGN KEY (user_id) REFERENCES users (id);
 ALTER TABLE users_projects
-  ADD CONSTRAINT fk_projects FOREIGN KEY (project_id) REFERENCES projects (id);
+  ADD CONSTRAINT fk_projects_from_user_project FOREIGN KEY (project_id) REFERENCES projects (id);
 
 --**************************************************************************************
