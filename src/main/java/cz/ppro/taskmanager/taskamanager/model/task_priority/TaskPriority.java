@@ -13,6 +13,9 @@ public class TaskPriority extends DbEntity {
     @Column(name = "name")
     private String name;
 
+    public TaskPriority() {
+    }
+
     public TaskPriority(String name) {
         this.name = name;
     }

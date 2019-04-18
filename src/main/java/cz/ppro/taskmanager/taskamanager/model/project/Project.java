@@ -29,6 +29,9 @@ public class Project extends DbEntity {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private Set<User> usersInProject;
 
+    public Project() {
+    }
+
     public Project(String name, Date created) {
         this.name = name;
         this.created = created;

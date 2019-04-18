@@ -13,6 +13,9 @@ public class TaskType extends DbEntity {
     @Column(name = "name")
     private String name;
 
+    public TaskType() {
+    }
+
     public TaskType(String name) {
         this.name = name;
     }

@@ -13,6 +13,9 @@ public class TaskState extends DbEntity {
     @Column(name = "name")
     private String name;
 
+    public TaskState() {
+    }
+
     public TaskState(String name) {
         this.name = name;
     }

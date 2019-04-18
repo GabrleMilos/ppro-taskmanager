@@ -46,6 +46,9 @@ public class Task  extends DbEntity {
     @JoinColumn(name="type_id")
     private TaskType type;
 
+    public Task() {
+    }
+
     public Task(String name, String description, Date created) {
         this.name = name;
         this.description = description;

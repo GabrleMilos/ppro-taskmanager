@@ -18,7 +18,8 @@ public class UserController {
 
     @RequestMapping("/user/login/{email}/{password}")
     public User loginUser(@PathVariable String email,@PathVariable String password){
-        return null;
+        User user = userRepository.findByEmailAndPassword(email,password);
+        return user;
     }
 
     @RequestMapping("/user/findUsers")

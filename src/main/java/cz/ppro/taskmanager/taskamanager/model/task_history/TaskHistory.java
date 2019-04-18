@@ -26,6 +26,9 @@ public class TaskHistory extends DbEntity {
     @JoinColumn(name="user_id")
     private User user;
 
+    public TaskHistory() {
+    }
+
     public TaskHistory(String text, Date updated) {
         this.text = text;
         this.updated = updated;

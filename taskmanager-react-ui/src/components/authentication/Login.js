@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 
 export class Login extends Component {
     state = {
-        email:'',
-        password:''
+        email: '',
+        password: ''
     };
     handleChange = (e) => {
         this.setState({
@@ -15,12 +15,14 @@ export class Login extends Component {
         this.loginUser();
 
     }
-    async loginUser(){
-        // const responseDetail = await fetch('http://localhost:8080/user/login/' + this.state.email + '/' + this.state.password);
-        // const userAsyncResponse = await responseDetail.json();
-        const userAsyncResponse = {id:'1', firstName:'peter', lastName:'panda',email:this.state.email,password:this.state.password};
-        localStorage.setItem('loggedInUser',JSON.stringify(userAsyncResponse));
-        this.props.history.push("/task/index");
+
+    async loginUser() {
+        const responseDetail = await fetch('http://localhost:8080/user/login/' + this.state.email + '/' + this.state.password);
+        const userAsyncResponse = await responseDetail.json();
+        if (userAsyncResponse) {
+            localStorage.setItem('loggedInUser', JSON.stringify(userAsyncResponse));
+            this.props.history.push("/task/index");
+        }
     }
 
     componentDidMount() {
