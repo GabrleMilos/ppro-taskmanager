@@ -3,8 +3,6 @@ import {NavLink} from "react-router-dom";
 
 export class LoggedInLinks extends Component {
     render() {
-        console.log('props from logged in links');
-        console.log(this.props);
         return (
             <ul className='right'>
                 <li>
