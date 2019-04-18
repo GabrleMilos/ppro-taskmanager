@@ -4,7 +4,7 @@ export class Register extends Component {
     state = {
         email:'',
         password:'',
-        fistName:'',
+        firstName:'',
         lastName:''
     };
 
