@@ -2,19 +2,36 @@ import React, {Component} from 'react';
 import {ProjectTable} from './ProjectTable'
 
 export class ProjectList extends Component {
+    state = {
+        projects: []
+    };
+
+    async componentDidMount() {
+        fetch('http://localhost:8080/project/myProjects/' + 'abc').then(response => {
+                response.json().then(data => {
+                    this.setState({projects: data});
+                })
+            }
+        );
+
+        // const userAsyncResponse = await responseDetail.json();
+        //
+        // if (userAsyncResponse) {
+        //     localStorage.setItem('loggedInUser', JSON.stringify(userAsyncResponse));
+        //     this.props.history.push("/task/index");
+        // }
+    }
+
+
     render() {
-        const projects =
-            [
-                {id: 1, name: 'Proejct1', created: '1991-01-01', manager: 'abc1'},
-                {id: 2, name: 'Proejct2', created: '1992-02-02', manager: 'abc2'},
-                {id: 3, name: 'Proejct3', created: '1993-03-03',manager:'abc3'},
-            ]
-        ;
+        const {projects} = this.state;
+
         return (
             <div className="container">
                 <h5 className="grey-text text-darken-3">Projects</h5>
                 <ProjectTable projects={projects}/>
             </div>
         )
-    };
+    }
+    ;
 }

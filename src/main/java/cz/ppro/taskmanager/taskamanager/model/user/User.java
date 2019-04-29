@@ -1,5 +1,6 @@
 package cz.ppro.taskmanager.taskamanager.model.user;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import cz.ppro.taskmanager.taskamanager.model.DbEntity;
 import cz.ppro.taskmanager.taskamanager.model.project.Project;
 
@@ -25,6 +26,7 @@ public class User extends DbEntity {
     @Column(name = "password")
     private String password;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "usersInProject")
     Set<Project> projects;
 
