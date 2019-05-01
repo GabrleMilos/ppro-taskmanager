@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TaskRepository extends Repository<Task, Integer> {
     List<Task> findAll();
-    List<Task> findAllByAssignedUserOrderByCreated(User user);
+    List<Task> findAllByAssignedUser(User user);
 }

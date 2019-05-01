@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import M from "materialize-css";
 
 export class TaskTable extends Component {
-    state = {};
-
     componentDidMount() {
         // Auto initialize all the things!
         M.AutoInit();
@@ -30,11 +28,11 @@ export class TaskTable extends Component {
                     <tr key={task.id}>
                         <td>{task.name}</td>
                         <td>{task.created}</td>
-                        <td>{task.assignedTo}</td>
-                        <td>{task.project}</td>
-                        <td>{task.priority}</td>
-                        <td>{task.state}</td>
-                        <td>{task.type}</td>
+                        <td>{task.assignedUser.email}</td>
+                        <td>{task.project.name}</td>
+                        <td>{task.priority.name}</td>
+                        <td>{task.state.name}</td>
+                        <td>{task.type.name}</td>
                     </tr>
                 )}
 
