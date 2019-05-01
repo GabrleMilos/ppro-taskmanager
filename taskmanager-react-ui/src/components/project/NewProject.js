@@ -11,7 +11,13 @@ export class NewProject extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+
+        fetch('http://localhost:8080/project/newProject/' + this.state.projectName + '/tom@themanager.com').then(response => {
+                response.json().then(data => {
+
+                })
+            }
+        );
     }
 
     render() {

@@ -9,6 +9,6 @@ import java.util.Collection;
 public interface UserRepository extends Repository<User, Integer> {
     @Transactional(readOnly = true)
     Collection<User> findAll();
-
+    User findByEmail(String email);
     User findByEmailAndPassword(String email,String password);
 }
