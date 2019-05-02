@@ -9,10 +9,10 @@ export class LoggedInLinks extends Component {
                     <NavLink to='/project/new'> New Project </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/project/index'> Projects </NavLink>
+                    <NavLink to='/task/index'> Tasks </NavLink>
                 </li>
                 <li>
-                    <NavLink to='/task/index'> Tasks </NavLink>
+                    <NavLink to='/project/index'> Projects </NavLink>
                 </li>
                 <li>
                     <a onClick={this.handleLogOut}> Log out </a>
