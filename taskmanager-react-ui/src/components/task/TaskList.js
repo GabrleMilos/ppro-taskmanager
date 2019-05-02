@@ -19,8 +19,6 @@ export class TaskList extends Component {
 
     render() {
         const {tasks} = this.state;
-        console.log("TASKS");
-        console.log(tasks);
         return (
             <div className="container">
                 <h5 className="grey-text text-darken-3">Tasks</h5>
