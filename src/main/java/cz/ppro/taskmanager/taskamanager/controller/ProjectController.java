@@ -26,7 +26,15 @@ public class ProjectController {
     @CrossOrigin
     @RequestMapping("/project/myProjects/{email}")
     public List<Project> getProjectsForUser (@PathVariable String email){
-        return projectRepository.findAll();
+        List<User> users = new ArrayList<>();
+        users.add(userRepository.findByEmail(email));
+        return projectRepository.findAllByUsersInProject(users);
+    }
+
+    @CrossOrigin
+    @RequestMapping("/project/detail/{projectId}")
+    public Project getProject(@PathVariable int projectId){
+        return projectRepository.findById(projectId);
     }
 
     @CrossOrigin
@@ -37,6 +45,15 @@ public class ProjectController {
         project.setManager(userRepository.findByEmail(email));
         project.setName(projectName);
         project.setUsersInProject(null);
+        projectRepository.save(project);
+        return true;
+    }
+
+    @CrossOrigin
+    @RequestMapping("/project/update/{projectId}/{projectName}")
+    public boolean updateProject (@PathVariable int projectId,@PathVariable String projectName ){
+        Project project = projectRepository.findById(projectId);
+        project.setName(projectName);
         projectRepository.save(project);
         return true;
     }

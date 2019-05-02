@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 export class UpdateProject extends Component {
     state = {
-        projectName:''
+        projectName:'',
+        projectId:''
 
     };
     handleChange = (e) => {
@@ -12,7 +13,12 @@ export class UpdateProject extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        fetch('http://localhost:8080/project/update/' + this.state.projectName + '/tom@themanager.com').then(response => {
+                response.json().then(data => {
+
+                })
+            }
+        );
     }
 
     render() {

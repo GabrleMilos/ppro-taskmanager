@@ -6,9 +6,6 @@ export class LoggedInLinks extends Component {
         return (
             <ul className='right'>
                 <li>
-                    <NavLink to='/task/new'> New Task </NavLink>
-                </li>
-                <li>
                     <NavLink to='/project/new'> New Project </NavLink>
                 </li>
                 <li>

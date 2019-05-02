@@ -7,19 +7,12 @@ export class ProjectList extends Component {
     };
 
     async componentDidMount() {
-        fetch('http://localhost:8080/project/myProjects/' + 'abc').then(response => {
+        fetch('http://localhost:8080/project/myProjects/' + 'john@thecofeebringer.com').then(response => {
                 response.json().then(data => {
                     this.setState({projects: data});
                 })
             }
         );
-
-        // const userAsyncResponse = await responseDetail.json();
-        //
-        // if (userAsyncResponse) {
-        //     localStorage.setItem('loggedInUser', JSON.stringify(userAsyncResponse));
-        //     this.props.history.push("/task/index");
-        // }
     }
 
 

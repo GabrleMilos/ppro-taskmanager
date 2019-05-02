@@ -1,6 +1,7 @@
 package cz.ppro.taskmanager.taskamanager.model.project;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import cz.ppro.taskmanager.taskamanager.model.DbEntity;
 import cz.ppro.taskmanager.taskamanager.model.user.User;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,7 +26,7 @@ public class Project extends DbEntity {
     @JoinColumn(name = "manager_id")
     private User manager;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name = "users_projects",
             joinColumns = @JoinColumn(name = "project_id"),
