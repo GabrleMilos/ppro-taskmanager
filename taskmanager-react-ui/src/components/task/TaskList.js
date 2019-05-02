@@ -8,12 +8,18 @@ export class TaskList extends Component {
     };
 
     async componentDidMount() {
-        await fetch('http://localhost:8080/task/userTasks/' + 'dave@thecofeemaker.com').then(response => {
+        await fetch('http://localhost:8080/task/userTasksForProject/' + 'john@thecofeebringer.com/2').then(response => {
                 response.json().then(data => {
                     this.setState({tasks: data});
                 })
             }
         );
+        // await fetch('http://localhost:8080/task/userTasks/' + 'dave@thecofeemaker.com').then(response => {
+        //         response.json().then(data => {
+        //             this.setState({tasks: data});
+        //         })
+        //     }
+        // );
         M.AutoInit();
     }
 

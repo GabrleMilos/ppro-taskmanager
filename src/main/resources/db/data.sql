@@ -30,7 +30,7 @@ INSERT INTO projects VALUES (2,'Second project','2019-01-01',2);
 --**************************************************************************************
 -- id, name, description, created, assigned_user_id, project_id, priority_id, state_id, type_id
 INSERT INTO tasks VALUES (1,'make cofee','prepare coffee for John The manager','2018-10-07',2,1,1,2,2);
-INSERT INTO tasks VALUES (2,'bring cofee','bring coffee to John The manager','2018-10-07',3,1,2,1,2);
+INSERT INTO tasks VALUES (2,'bring cofee','bring coffee to John The manager','2018-10-07',3,2,2,1,2);
 
 --**************************************************************************************
 -- id, description, created, task_id,user_id
