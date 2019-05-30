@@ -2,6 +2,7 @@ package cz.ppro.taskmanager.taskamanager.controller;
 
 import cz.ppro.taskmanager.taskamanager.model.user.User;
 import cz.ppro.taskmanager.taskamanager.model.user.UserRepository;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ public class UserController {
         this.userRepository =  userRepository;
     }
 
+    @CrossOrigin
     @RequestMapping("/user/login/{email}/{password}")
     public User loginUser(@PathVariable String email,@PathVariable String password){
         User user = userRepository.findByEmailAndPassword(email,password);
