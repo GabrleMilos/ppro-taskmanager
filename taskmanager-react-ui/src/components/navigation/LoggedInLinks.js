@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
+import {UserConsumer, UserContext} from "../../context/UserContext";
+import {LoggedOffLinks} from "./LoggedOffLinks";
+import {Login} from "../authentication/Login";
 
 export class LoggedInLinks extends Component {
     render() {
@@ -18,14 +21,24 @@ export class LoggedInLinks extends Component {
                     <a onClick={this.handleLogOut}> Log out </a>
                 </li>
                 <li>
-                    <NavLink to='/' className="btn btn-floating pink lighten-1"> NN</NavLink>
+                    <UserConsumer>
+                        {
+                            ({iconText}) => (
+                                <NavLink to='/' className="btn btn-floating pink lighten-1">
+                                    {iconText}
+                                </NavLink>
+                            )
+                        }
+                    </UserConsumer>
                 </li>
             </ul>
         );
     }
 
     handleLogOut = (e) => {
+        const {setIsAuthorized, setUser} = this.context;
+        setIsAuthorized(false);
         this.props.history.push("/login");
     }
 }
-
+LoggedInLinks.contextType = UserContext;

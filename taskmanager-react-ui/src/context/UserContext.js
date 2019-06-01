@@ -2,7 +2,8 @@ import React from 'react';
 
 const DEFAULT_STATE = {
     isAuthorized: false,
-    username: undefined,
+    firstName: undefined,
+    lastName: undefined,
     email: undefined,
     iconText: undefined,
     setIsAuthorized: () => null,
@@ -15,39 +16,45 @@ class UserProvider extends React.Component {
     state = DEFAULT_STATE;
 
     setIsAuthorized = (value) => {
-        this.setState({ isAuthorized: value })
+        this.setState({isAuthorized: value})
     };
 
-    setUser = ({ username, email, iconText }) => {
-        this.setState({ username, email, iconText })
+    setUser = ({firstName, lastName, email}) => {
+        this.setState({
+            firstName,
+            lastName,
+            email,
+            iconText: firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase()
+        })
     };
 
     render() {
-        const { children } = this.props;
-        const { isAuthorized, username, email, iconText } = this.state;
-        return(
+        const {children} = this.props;
+        const {isAuthorized, firstName, lastName, email, iconText} = this.state;
+        return (
             <UserContext.Provider value={
                 {
                     isAuthorized,
-                    username,
+                    firstName,
+                    lastName,
                     email,
                     iconText,
-                    setIsAuthorized:this.setIsAuthorized,
+                    setIsAuthorized: this.setIsAuthorized,
                     setUser: this.setUser,
                 }
             }>
-                { children }
+                {children}
             </UserContext.Provider>
         );
     };
 }
 
-const UserConsumer = ({ children }) => {
+const UserConsumer = ({children}) => {
     return (
         <UserContext.Consumer>
-            { children }
+            {children}
         </UserContext.Consumer>
     );
 };
 
-export { UserProvider, UserConsumer, UserContext };
+export {UserProvider, UserConsumer, UserContext};
