@@ -15,7 +15,7 @@ export class Navbar extends Component {
                         {
                             ({isAuthorized}) => {
                                 if (isAuthorized == true) {
-                                    return <LoggedInLinks history={this.props.history}/>
+                                    return <LoggedInLinks {...this.props}/>
                                 } else {
                                     return <LoggedOffLinks/>
                                 }

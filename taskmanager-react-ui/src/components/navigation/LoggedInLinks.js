@@ -34,7 +34,7 @@ export class LoggedInLinks extends Component {
     }
 
     handleLogOut = (e) => {
-        const {setIsAuthorized, setUser} = this.context;
+        const {setIsAuthorized} = this.context;
         setIsAuthorized(false);
         this.props.history.push("/login");
     }
