@@ -14,7 +14,6 @@ export class Navbar extends Component {
                     <UserConsumer>
                         {
                             ({isAuthorized}) => {
-                                console.log(isAuthorized);
                                 if (isAuthorized == true) {
                                     return <LoggedInLinks history={this.props.history}/>
                                 } else {
