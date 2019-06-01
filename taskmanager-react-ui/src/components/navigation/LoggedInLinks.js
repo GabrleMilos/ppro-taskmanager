@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {NavLink} from "react-router-dom";
 import {UserConsumer, UserContext} from "../../context/UserContext";
-import {LoggedOffLinks} from "./LoggedOffLinks";
-import {Login} from "../authentication/Login";
 
 export class LoggedInLinks extends Component {
     render() {

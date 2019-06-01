@@ -8,9 +8,9 @@ export class Navbar extends Component {
     render() {
         return (
             <nav className="grey darken-3">
-                <Link to='/' className='brand-logo'> TaskManager </Link>
-
                 <div className="container nav-wrapper">
+                    <Link to='/' className='brand-logo'> TaskManager </Link>
+
                     <UserConsumer>
                         {
                             ({isAuthorized}) => {
