@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {UserContext} from '../../context/UserContext';
 
 export class Login extends Component {
     state = {
@@ -12,17 +13,17 @@ export class Login extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        this.loginUser();
+        const { history } = this.props;
+        const {setIsAuthorized, setUser} = this.context;
 
-    }
-
-    async loginUser() {
-        const responseDetail = await fetch('http://localhost:8080/user/login/' + this.state.email + '/' + this.state.password);
-        const userAsyncResponse = await responseDetail.json();
-        if (userAsyncResponse) {
-            localStorage.setItem('loggedInUser', JSON.stringify(userAsyncResponse));
-            this.props.history.push("/task/index");
-        }
+        fetch('http://localhost:8080/user/login/' + this.state.email + '/' + this.state.password)
+            .then((res) => res.json())
+            .then((userInfo) => {
+                setIsAuthorized(true);
+                setUser(userInfo);
+                history.push('/task/index');
+            })
+            .catch((e) => console.log(e));
     }
 
     componentDidMount() {
@@ -50,3 +51,5 @@ export class Login extends Component {
         );
     }
 }
+
+Login.contextType = UserContext;
