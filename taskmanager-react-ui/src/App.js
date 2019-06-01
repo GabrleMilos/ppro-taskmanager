@@ -10,6 +10,7 @@ import {NewProject} from "./components/project/NewProject";
 import {UpdateTask} from "./components/task/UpdateTask";
 import {UpdateProject} from "./components/project/UpdateProject";
 import {UserProvider} from "./context/UserContext";
+import ProtectedRoute from './Routes/ProtectedRoute';
 
 class App extends Component {
 
@@ -29,13 +30,13 @@ class App extends Component {
                         <Route path='/login' component={Login}/>
                         <Route path='/register' component={Register}/>
                         {/*TASK routes*/}
-                        <Route path='/task/index' component={TaskList}/>
-                        <Route path='/task/new' component={NewTask}/>
-                        <Route path='/task/update' component={UpdateTask}/>
+                        <ProtectedRoute path='/task/index' component={TaskList}/>
+                        <ProtectedRoute path='/task/new' component={NewTask}/>
+                        <ProtectedRoute path='/task/update' component={UpdateTask}/>
                         {/*PROJECT routes*/}
-                        <Route path='/project/index' component={ProjectList}/>
-                        <Route path='/project/new' component={NewProject}/>
-                        <Route path='/project/update' component={UpdateProject}/>
+                        <ProtectedRoute path='/project/index' component={ProjectList}/>
+                        <ProtectedRoute path='/project/new' component={NewProject}/>
+                        <ProtectedRoute path='/project/update' component={UpdateProject}/>
                     </Switch>
                 </Router>
             </UserProvider>
