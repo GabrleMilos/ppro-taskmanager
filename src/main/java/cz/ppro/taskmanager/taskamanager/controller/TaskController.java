@@ -33,6 +33,7 @@ public class TaskController {
     @RequestMapping("/task/userTasks/{email}")
     public List<Task> getUserTasks(@PathVariable String email) {
         List<Task> tasks = taskRepository.findAllByAssignedUser(userRepository.findByEmail(email));
+        int a = 1;
         return tasks;
     }
 }

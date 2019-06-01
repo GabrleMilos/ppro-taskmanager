@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import M from "materialize-css";
 import {TaskTable} from "./TaskTable";
+import {UserContext} from "../../context/UserContext";
+import {LoggedInLinks} from "../navigation/LoggedInLinks";
 
 export class TaskList extends Component {
     state = {
@@ -8,18 +10,14 @@ export class TaskList extends Component {
     };
 
     async componentDidMount() {
-        await fetch('http://localhost:8080/task/userTasksForProject/' + 'john@thecofeebringer.com/2').then(response => {
+        const {email} = this.context;
+        // mozne pridat >>>>>, { mode: 'no-cors' }<<<< za + email           *
+        await fetch('http://localhost:8080/task/getUserTasks/' + email).then(response => {
                 response.json().then(data => {
                     this.setState({tasks: data});
                 })
             }
         );
-        // await fetch('http://localhost:8080/task/userTasks/' + 'dave@thecofeemaker.com').then(response => {
-        //         response.json().then(data => {
-        //             this.setState({tasks: data});
-        //         })
-        //     }
-        // );
         M.AutoInit();
     }
 
@@ -33,3 +31,5 @@ export class TaskList extends Component {
         );
     }
 }
+
+TaskList.contextType = UserContext;
