@@ -2,23 +2,24 @@ import React, {Component} from 'react';
 import M from "materialize-css";
 import {TaskTable} from "./TaskTable";
 import {UserContext} from "../../context/UserContext";
-import {LoggedInLinks} from "../navigation/LoggedInLinks";
 
 export class TaskList extends Component {
     state = {
-        tasks:[]
+        tasks: []
     };
 
-    async componentDidMount() {
+    componentDidMount() {
+        M.AutoInit();
         const {email} = this.context;
-        // mozne pridat >>>>>, { mode: 'no-cors' }<<<< za + email           *
-        await fetch('http://localhost:8080/task/getUserTasks/' + email).then(response => {
+
+        fetch('http://localhost:8080/task/userTasks/' + email)
+            .then(response => {
                 response.json().then(data => {
                     this.setState({tasks: data});
                 })
-            }
-        );
-        M.AutoInit();
+            })
+            .catch((e) => console.log(e));
+        ;
     }
 
     render() {
