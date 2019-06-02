@@ -11,6 +11,7 @@ export class ProjectTable extends Component {
 
     render() {
             const {projects} = this.props;
+            console.log(projects);
         return (
             <table className='striped'>
                 <thead>
@@ -26,7 +27,7 @@ export class ProjectTable extends Component {
                     <tr key={project.id}>
                         <td>{project.name}</td>
                         <td>{project.created}</td>
-                        <td>{project.manager}</td>
+                        <td>{project.manager.email}</td>
                     </tr>
                 )}
                 </tbody>

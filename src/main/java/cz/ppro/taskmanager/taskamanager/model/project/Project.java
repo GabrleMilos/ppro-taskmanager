@@ -21,7 +21,7 @@ public class Project extends DbEntity {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date created;
 
-    @JsonBackReference
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "manager_id")
     private User manager;
