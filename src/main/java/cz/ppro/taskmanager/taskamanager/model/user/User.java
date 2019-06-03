@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -74,6 +75,9 @@ public class User extends DbEntity {
     }
 
     public Set<Project> getProjects() {
+        if (projects == null) {
+            projects = new HashSet<>();
+        }
         return projects;
     }
 

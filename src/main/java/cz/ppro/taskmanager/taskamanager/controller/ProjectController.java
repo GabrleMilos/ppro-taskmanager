@@ -39,14 +39,13 @@ public class ProjectController {
 
     @CrossOrigin
     @RequestMapping("/project/newProject/{projectName}/{email}")
-    public boolean createProject (@PathVariable String projectName,@PathVariable String email ){
+    public Project createProject (@PathVariable String projectName,@PathVariable String email ){
         Project project = new Project();
         project.setCreated(new Date());
         project.setManager(userRepository.findByEmail(email));
         project.setName(projectName);
-        project.setUsersInProject(null);
-        projectRepository.save(project);
-        return true;
+        project.getUsersInProject().add(userRepository.findByEmail(email));
+        return projectRepository.save(project);
     }
 
     @CrossOrigin
