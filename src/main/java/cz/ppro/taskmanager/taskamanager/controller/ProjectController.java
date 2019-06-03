@@ -25,7 +25,7 @@ public class ProjectController {
 
     @CrossOrigin
     @RequestMapping("/project/myProjects/{email}")
-    public List<Project> getProjectsForUser (@PathVariable String email){
+    public List<Project> getProjectsForUser(@PathVariable String email) {
         List<User> users = new ArrayList<>();
         users.add(userRepository.findByEmail(email));
         return projectRepository.findAllByUsersInProject(users);
@@ -33,13 +33,13 @@ public class ProjectController {
 
     @CrossOrigin
     @RequestMapping("/project/detail/{projectId}")
-    public Project getProject(@PathVariable int projectId){
+    public Project getProject(@PathVariable int projectId) {
         return projectRepository.findById(projectId);
     }
 
     @CrossOrigin
     @RequestMapping("/project/newProject/{projectName}/{email}")
-    public Project createProject (@PathVariable String projectName,@PathVariable String email ){
+    public Project createProject(@PathVariable String projectName, @PathVariable String email) {
         User user = userRepository.findByEmail(email);
         Project project = new Project();
         project.setCreated(new Date());
@@ -51,11 +51,14 @@ public class ProjectController {
 
     @CrossOrigin
     @RequestMapping("/project/update/{projectId}/{projectName}/{email}")
-    public boolean updateProject (@PathVariable int projectId,@PathVariable String projectName ){
+    public boolean updateProject(@PathVariable int projectId, @PathVariable String projectName, @PathVariable String email) {
         Project project = projectRepository.findById(projectId);
-        project.setName(projectName);
-        projectRepository.save(project);
-        return true;
+        if (email.equals(project.getManager().getEmail())) {
+            project.setName(projectName);
+            projectRepository.save(project);
+            return true;
+        }
+        return false;
     }
 
 }

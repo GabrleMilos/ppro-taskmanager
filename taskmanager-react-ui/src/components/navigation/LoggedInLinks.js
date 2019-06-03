@@ -19,9 +19,9 @@ export class LoggedInLinks extends Component {
                     <UserConsumer>
                         {
                             ({iconText}) => (
-                                <NavLink to='/' className="btn btn-floating pink lighten-1">
+                                <button className="btn btn-floating pink lighten-1">
                                     {iconText}
-                                </NavLink>
+                                </button>
                             )
                         }
                     </UserConsumer>
