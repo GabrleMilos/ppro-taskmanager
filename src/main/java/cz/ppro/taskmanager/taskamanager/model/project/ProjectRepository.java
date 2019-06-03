@@ -1,14 +1,13 @@
 package cz.ppro.taskmanager.taskamanager.model.project;
 
 import cz.ppro.taskmanager.taskamanager.model.user.User;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ProjectRepository extends Repository<Project, Integer> {
+public interface ProjectRepository extends CrudRepository<Project, Integer> {
     List<Project> findAll();
     List<Project> findAllByUsersInProject(List<User> users);
-    void save(Project p);
     Project findById(int id);
 
 }
