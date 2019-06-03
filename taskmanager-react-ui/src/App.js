@@ -18,7 +18,7 @@ class App extends Component {
         return (
             <UserProvider>
                 <Router>
-                    <Route path='/' render={(props) => <Navbar  {...props}/>}/>
+                     <Navbar  {...this.props}/>
                     <Switch>
                         {/*ACCOUNT routes*/}
                         <Route path='/login' component={Login} {...this.props}/>
