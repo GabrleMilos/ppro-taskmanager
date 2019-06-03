@@ -23,11 +23,11 @@ public class TaskController {
         this.projectRepository = projectRepository;
     }
 
-    @CrossOrigin
-    @RequestMapping("/task/userTasksForProject/{email}/{projectId}")
-    public List<Task> getUserTasksForProject(@PathVariable String email, @PathVariable Integer projectId) {
-        return taskRepository.findAllByAssignedUserAndProject(userRepository.findByEmail(email), projectRepository.findById(projectId));
-    }
+//    @CrossOrigin
+//    @RequestMapping("/task/userTasksForProject/{email}/{projectId}")
+//    public List<Task> getUserTasksForProject(@PathVariable String email, @PathVariable Integer projectId) {
+//        return taskRepository.findAllByAssignedUserAndProject(userRepository.findByEmail(email), projectRepository.findById(projectId));
+//    }
 
     @CrossOrigin
     @RequestMapping("/task/userTasks/{email}")

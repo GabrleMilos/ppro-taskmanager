@@ -13,10 +13,11 @@ export class NewProject extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
+        const { history } = this.props;
         const {email} = this.context;
         fetch('http://localhost:8080/project/newProject/' + this.state.projectName + '/' + email).then(response => {
                 response.json().then(data => {
-
+                    history.push('/project/index');
                 })
             }
         );
