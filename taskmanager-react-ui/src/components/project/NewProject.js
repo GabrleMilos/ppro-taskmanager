@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {UserContext} from "../../context/UserContext";
+import {ProjectList} from "./ProjectList";
 
 export class NewProject extends Component {
     state = {
@@ -11,8 +13,8 @@ export class NewProject extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-
-        fetch('http://localhost:8080/project/newProject/' + this.state.projectName + '/tom@themanager.com').then(response => {
+        const {email} = this.context;
+        fetch('http://localhost:8080/project/newProject/' + this.state.projectName + '/' + email).then(response => {
                 response.json().then(data => {
 
                 })
@@ -38,3 +40,5 @@ export class NewProject extends Component {
         );
     }
 }
+
+NewProject.contextType = UserContext;

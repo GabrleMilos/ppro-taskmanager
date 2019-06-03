@@ -24,6 +24,13 @@ public class UserController {
         return user;
     }
 
+    @CrossOrigin
+    @RequestMapping("/user/register/{email}/{password}/{firstName}/{lastName}")
+    public User registerUser(@PathVariable String email,@PathVariable String password,@PathVariable String firstName,@PathVariable String lastName){
+        return userRepository.save(new User(firstName,lastName,email,password));
+    }
+
+
     @RequestMapping("/user/findUsers")
     public Collection<User> getUsers(){
 

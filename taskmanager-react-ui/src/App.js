@@ -21,16 +21,16 @@ class App extends Component {
                     <Route path='/' render={(props) => <Navbar  {...props}/>}/>
                     <Switch>
                         {/*ACCOUNT routes*/}
-                        <Route path='/login' component={Login}/>
-                        <Route path='/register' component={Register}/>
+                        <Route path='/login' component={Login} {...this.props}/>
+                        <Route path='/register' component={Register} {...this.props}/>
                         {/*TASK routes*/}
-                        <ProtectedRoute path='/task/index' component={TaskList}/>
-                        <ProtectedRoute path='/task/new' component={NewTask}/>
-                        <ProtectedRoute path='/task/update' component={UpdateTask}/>
+                        <ProtectedRoute path='/task/index' component={TaskList} {...this.props}/>
+                        <ProtectedRoute path='/task/new' component={NewTask} {...this.props}/>
+                        <ProtectedRoute path='/task/update' component={UpdateTask} {...this.props}/>
                         {/*PROJECT routes*/}
-                        <ProtectedRoute path='/project/index' component={ProjectList}/>
-                        <ProtectedRoute path='/project/new' component={NewProject}/>
-                        <ProtectedRoute path='/project/update' component={UpdateProject}/>
+                        <ProtectedRoute path='/project/index' component={ProjectList} {...this.props}/>
+                        <ProtectedRoute path='/project/new' component={NewProject} {...this.props}/>
+                        <ProtectedRoute path='/project/update' component={UpdateProject} {...this.props}/>
                     </Switch>
                 </Router>
             </UserProvider>

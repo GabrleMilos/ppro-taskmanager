@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {UserContext} from "../../context/UserContext";
+import {NewProject} from "../project/NewProject";
 
 export class Register extends Component {
     state = {
@@ -9,7 +11,6 @@ export class Register extends Component {
     };
 
     componentDidMount() {
-        localStorage.removeItem('loggedInUser');
     }
 
     handleChange = (e) => {
@@ -19,14 +20,24 @@ export class Register extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        const { history } = this.props;
+        const {setIsAuthorized, setUser} = this.context;
+
+        fetch('http://localhost:8080/user/register/' + this.state.email + '/' + this.state.password+ '/' + this.state.firstName+ '/' + this.state.lastName)
+            .then((res) => res.json())
+            .then((userInfo) => {
+                setIsAuthorized(true);
+                setUser(userInfo);
+                history.push('/task/index');
+            })
+            .catch((e) => console.log(e));
     }
 
     render() {
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className='white'>
-                    <h5 className="grey-text text-darken-3">Sign in</h5>
+                    <h5 className="grey-text text-darken-3">Register</h5>
                     <div className="input-field">
                         <label htmlFor='email'>Email</label>
                         <input id='email' type='email' onChange={this.handleChange}/>
@@ -51,3 +62,5 @@ export class Register extends Component {
         );
     }
 }
+
+Register.contextType = UserContext;
