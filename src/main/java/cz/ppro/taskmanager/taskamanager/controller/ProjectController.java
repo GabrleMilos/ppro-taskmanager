@@ -50,7 +50,7 @@ public class ProjectController {
     }
 
     @CrossOrigin
-    @RequestMapping("/project/update/{projectId}/{projectName}")
+    @RequestMapping("/project/update/{projectId}/{projectName}/{email}")
     public boolean updateProject (@PathVariable int projectId,@PathVariable String projectName ){
         Project project = projectRepository.findById(projectId);
         project.setName(projectName);

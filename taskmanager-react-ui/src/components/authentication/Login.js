@@ -13,7 +13,7 @@ export class Login extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        const { history } = this.props;
+        const {history} = this.props;
         const {setIsAuthorized, setUser} = this.context;
 
         fetch('http://localhost:8080/user/login/' + this.state.email + '/' + this.state.password)

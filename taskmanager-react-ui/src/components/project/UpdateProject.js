@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
+import {UserContext} from "../../context/UserContext";
 
 export class UpdateProject extends Component {
     state = {
-        projectName:'',
-        projectId:''
+        projectName: '',
+        projectId: ''
 
     };
     handleChange = (e) => {
@@ -13,7 +14,8 @@ export class UpdateProject extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:8080/project/update/' + this.state.projectName + '/tom@themanager.com').then(response => {
+        const {email} = this.context;
+        fetch('http://localhost:8080/project/update/' + this.state.projectName + '/' + email).then(response => {
                 response.json().then(data => {
 
                 })
@@ -32,10 +34,12 @@ export class UpdateProject extends Component {
                     </div>
 
                     <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Add project</button>
+                        <button className="btn pink lighten-1 z-depth-0">Update project</button>
                     </div>
                 </form>
             </div>
         );
     }
 }
+
+UpdateProject.contextType = UserContext;
