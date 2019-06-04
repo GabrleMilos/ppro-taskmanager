@@ -29,11 +29,21 @@ export class ProjectList extends Component {
             state: {projectId: id}
         });
     }
+
+    detail = (id) => {
+        const {history} = this.props;
+
+        history.push({
+            pathname: '/project/detail/',
+            state: {projectId: id}
+        });
+    }
+
     deleteFromState = (id) => {
         let state = this.state;
         let remainingProjects = [...state.projects.filter(project => project.id !== id)];
         state.projects = remainingProjects;
-        this.setState({ state });
+        this.setState({state});
     }
     delete = (id) => {
         fetch('http://localhost:8080/project/delete/' + id).then(response => {
@@ -74,6 +84,9 @@ export class ProjectList extends Component {
                                 <td>{project.created}</td>
                                 <td>{project.manager.email}</td>
                                 <td>
+                                    <button className="btn-small gray z-depth-0"
+                                            onClick={() => this.detail(project.id)}>Detail
+                                    </button>
                                     <button className="btn-small orange z-depth-0"
                                             onClick={() => this.edit(project.id)}>Edit
                                     </button>
@@ -89,9 +102,8 @@ export class ProjectList extends Component {
                     </table>
                 </div>
             </div>
-        )
+        );
     }
-    ;
 }
 
 ProjectList.contextType = UserContext;

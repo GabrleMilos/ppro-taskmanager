@@ -11,6 +11,7 @@ import {UpdateTask} from "./components/task/UpdateTask";
 import {UpdateProject} from "./components/project/UpdateProject";
 import {UserProvider} from "./context/UserContext";
 import ProtectedRoute from './Routes/ProtectedRoute';
+import {ProjectDetails} from "./components/project/ProjectDetails";
 
 class App extends Component {
 
@@ -31,6 +32,7 @@ class App extends Component {
                         <ProtectedRoute path='/project/index' component={ProjectList} {...this.props}/>
                         <ProtectedRoute path='/project/new' component={NewProject} {...this.props}/>
                         <ProtectedRoute path='/project/update' component={UpdateProject} {...this.props}/>
+                        <ProtectedRoute path='/project/detail' component={ProjectDetails} {...this.props}/>
                     </Switch>
                 </Router>
             </UserProvider>
