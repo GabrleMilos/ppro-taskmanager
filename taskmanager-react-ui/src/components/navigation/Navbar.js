@@ -14,7 +14,7 @@ export class Navbar extends Component {
                     <UserConsumer>
                         {
                             ({isAuthorized}) => {
-                                if (isAuthorized == true) {
+                                if (isAuthorized === true) {
                                     return <LoggedInLinks {...this.props}/>
                                 } else {
                                     return <LoggedOffLinks/>

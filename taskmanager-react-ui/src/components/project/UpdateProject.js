@@ -35,10 +35,12 @@ export class UpdateProject extends Component {
         e.preventDefault();
         const {email} = this.context;
         const {projectId, projectName} = this.state;
+        const {history} = this.props;
         fetch('http://localhost:8080/project/update/' + projectId + '/' + projectName + '/' + email).then(response => {
                 response.json().then(data => {
-                    if(data == true){
-                    //TODO: pridat presmerovani podle toho
+                    if(data === true){
+                        history.push({pathname: '/project/index',
+                        });
                     }
                 })
             }

@@ -4,24 +4,56 @@ import {NavLink} from "react-router-dom";
 
 
 export class ProjectTable extends Component {
+    state = {
+        projects:[{}]
+    }
+    constructor(props){
+        super(props);
+        this.state = {
+            projects:[props.projects]
+        };
+    }
     componentDidMount() {
         // Auto initialize all the things!
+        const {projects} = this.props;
+        console.log('projects from props');
+        console.log(projects);
 
+        this.setState({projects: projects})
+        console.log('projects from state');
+        console.log(this.state);
         M.AutoInit();
     }
 
     edit = (id) => {
         const {history} = this.props;
 
-        history.push({pathname: '/project/update/',
-            state: { projectId: id }
+        history.push({
+            pathname: '/project/update/',
+            state: {projectId: id}
         });
     }
+    deleteFromState = (id) => {
+        let state = this.state;
+        let remainingProjects = [...state.projects.filter(project => project.id !== id)];
+        state.projects = remainingProjects;
+        this.setState({ state });
+    }
     delete = (id) => {
+        fetch('http://localhost:8080/project/delete/' + id).then(response => {
+                response.json().then(data => {
+                    if (data === true) {
+                        this.deleteFromState(id);
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            }
+        );
     }
 
     render() {
-        const {projects} = this.props;
+        const {projects} = this.state;
         return (
             <div>
                 <NavLink to='/project/new' className='btn-small green lighten-1 z-depth-0'> New Project </NavLink>
@@ -38,7 +70,7 @@ export class ProjectTable extends Component {
                     <tbody>
                     {projects && projects.map(project =>
                         <tr key={project.id}>
-                            <td>{project.name}</td>
+                            <td>{project.name} {project.id}</td>
                             <td>{project.created}</td>
                             <td>{project.manager.email}</td>
                             <td>
@@ -46,7 +78,9 @@ export class ProjectTable extends Component {
                                         onClick={() => this.edit(project.id)}>Edit
                                 </button>
                                 <button className="btn-small red z-depth-0"
-                                        onClick={() => this.delete(project.id)}> Delete
+                                        onClick={() => {
+                                            if (window.confirm('Are you sure you wish to delete this item?')) this.delete(project.id)
+                                        }}> Delete
                                 </button>
                             </td>
                         </tr>
