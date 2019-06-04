@@ -27,7 +27,7 @@ export class TaskList extends Component {
         return (
             <div className="container">
                 <h5 className="grey-text text-darken-3">Tasks</h5>
-                <TaskTable tasks={tasks}/>
+                <TaskTable tasks={tasks} {...this.props}/>
             </div>
         );
     }
