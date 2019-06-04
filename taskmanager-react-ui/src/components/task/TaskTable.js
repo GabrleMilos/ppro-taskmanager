@@ -7,6 +7,24 @@ export class TaskTable extends Component {
         M.AutoInit();
     }
 
+    edit = (id) => {
+        const {history} = this.props;
+
+        history.push({
+            pathname: '/task/update/',
+            state: {projectId: id}
+        });
+    }
+
+    detail = (id) => {
+        const {history} = this.props;
+
+        history.push({
+            pathname: '/task/detail/',
+            state: {projectId: id}
+        });
+    }
+
     render() {
         const {tasks} = this.props;
         return (
@@ -20,6 +38,7 @@ export class TaskTable extends Component {
                     <th>Priority</th>
                     <th>State</th>
                     <th>Type</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
 
@@ -33,6 +52,14 @@ export class TaskTable extends Component {
                         <td>{task.priority.name}</td>
                         <td>{task.state.name}</td>
                         <td>{task.type.name}</td>
+                        <td>
+                            <button className="btn-small gray z-depth-0"
+                                    onClick={() => this.detail(task.id)}>Detail
+                            </button>
+                            <button className="btn-small orange z-depth-0"
+                                    onClick={() => this.edit(task.id)}>Edit
+                            </button>
+                        </td>
                     </tr>
                 )}
 
