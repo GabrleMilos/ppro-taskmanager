@@ -4,6 +4,8 @@ import cz.ppro.taskmanager.taskamanager.model.project.Project;
 import cz.ppro.taskmanager.taskamanager.model.project.ProjectRepository;
 import cz.ppro.taskmanager.taskamanager.model.task.Task;
 import cz.ppro.taskmanager.taskamanager.model.task.TaskRepository;
+import cz.ppro.taskmanager.taskamanager.model.task_history.TaskHistory;
+import cz.ppro.taskmanager.taskamanager.model.task_history.TaskHistoryRepository;
 import cz.ppro.taskmanager.taskamanager.model.user.UserRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,18 +21,36 @@ public class TaskController {
     private TaskRepository taskRepository;
     private UserRepository userRepository;
     private ProjectRepository projectRepository;
+    private TaskHistoryRepository taskHistoryRepository;
 
-    public TaskController(TaskRepository taskRepository, UserRepository userRepository, ProjectRepository projectRepository) {
+    public TaskController(TaskRepository taskRepository, UserRepository userRepository, ProjectRepository projectRepository, TaskHistoryRepository taskHistoryRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
+        this.taskHistoryRepository = taskHistoryRepository;
     }
 
-//    @CrossOrigin
-//    @RequestMapping("/task/userTasksForProject/{email}/{projectId}")
-//    public List<Task> getUserTasksForProject(@PathVariable String email, @PathVariable Integer projectId) {
-//        return taskRepository.findAllByAssignedUserAndProject(userRepository.findByEmail(email), projectRepository.findById(projectId));
-//    }
+    @CrossOrigin
+    @RequestMapping("/task/history/{taskId}")
+    public List<TaskHistory> getTaskHistory(@PathVariable Integer taskId) {
+        Optional<Task> task = taskRepository.findById(taskId);
+        if (task.isPresent()) {
+            List<TaskHistory> t = taskHistoryRepository.findAll();
+            List<TaskHistory> taskHistories = taskHistoryRepository.findAllByTask(task.get());
+            return taskHistories;
+        }
+
+        return null;
+    }
+
+    @CrossOrigin
+    @RequestMapping("/task/detail/{taskId}")
+    public Task getTaskDetails(@PathVariable Integer taskId) {
+        Optional<Task> task = taskRepository.findById(taskId);
+        if (task.isPresent())
+            return task.get();
+        return null;
+    }
 
     @CrossOrigin
     @RequestMapping("/task/tasksForProject/{projectId}")

@@ -43,10 +43,6 @@ export class ProjectDetails extends Component {
         const {project, tasks} = this.state;
         if (project == null || tasks == null)
             return (<div></div>);
-        console.log('project');
-        console.log(project);
-        console.log('tasks');
-        console.log(tasks);
         return (
             <div className="container">
                 <h5 className="grey-text text-darken-3">Details of project</h5>

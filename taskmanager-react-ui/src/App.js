@@ -6,7 +6,7 @@ import {Register} from "./components/authentication/Register";
 import {ProjectList} from "./components/project/ProjectList"
 import {TaskList} from "./components/task/TaskList"
 import {NewTask} from "./components/task/NewTask";
-import {TaskDetail} from "./components/task/TaskDetails";
+import {TaskDetails} from "./components/task/TaskDetails";
 import {NewProject} from "./components/project/NewProject";
 import {UpdateTask} from "./components/task/UpdateTask";
 import {UpdateProject} from "./components/project/UpdateProject";
@@ -29,7 +29,7 @@ class App extends Component {
                         <ProtectedRoute path='/task/index' component={TaskList} {...this.props}/>
                         <ProtectedRoute path='/task/new' component={NewTask} {...this.props}/>
                         <ProtectedRoute path='/task/update' component={UpdateTask} {...this.props}/>
-                        <ProtectedRoute path='/task/detail' component={TaskDetail} {...this.props}/>
+                        <ProtectedRoute path='/task/detail' component={TaskDetails} {...this.props}/>
                         {/*PROJECT routes*/}
                         <ProtectedRoute path='/project/index' component={ProjectList} {...this.props}/>
                         <ProtectedRoute path='/project/new' component={NewProject} {...this.props}/>

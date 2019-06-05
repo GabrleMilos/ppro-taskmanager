@@ -1,6 +1,11 @@
 package cz.ppro.taskmanager.taskamanager.model.task_history;
 
-import org.springframework.data.repository.Repository;
+import cz.ppro.taskmanager.taskamanager.model.task.Task;
+import org.springframework.data.repository.CrudRepository;
 
-public interface TaskHistoryRepository extends Repository<TaskHistory, Integer> {
+import java.util.List;
+
+public interface TaskHistoryRepository extends CrudRepository<TaskHistory, Integer> {
+    List<TaskHistory> findAllByTask(Task task);
+    List<TaskHistory> findAll();
 }

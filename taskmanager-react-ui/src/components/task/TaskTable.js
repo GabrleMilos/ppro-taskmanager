@@ -12,7 +12,7 @@ export class TaskTable extends Component {
 
         history.push({
             pathname: '/task/update/',
-            state: {projectId: id}
+            state: {taskId: id}
         });
     }
 
@@ -21,7 +21,7 @@ export class TaskTable extends Component {
 
         history.push({
             pathname: '/task/detail/',
-            state: {projectId: id}
+            state: {taskId: id}
         });
     }
 
