@@ -6,7 +6,15 @@ import {TaskHistoryTable} from "../task/TaskHistoryTable";
 export class TaskDetails extends Component {
     state = {
         task: [],
-        taskHistory: []
+        taskHistory: [],
+        allStates: [],
+        allPriorities: [],
+        allTypes: [],
+        allUsers: [],
+        selectedStateId: '',
+        selectedPriorityId: '',
+        selectedTypeId: '',
+        selectedAssignedUserId: ''
     };
 
     constructor(props) {
@@ -14,7 +22,15 @@ export class TaskDetails extends Component {
         //IMPLEMENT OTHER JUNK HERE
         this.state = {
             task: null,
-            taskHistory: null
+            taskHistory: null,
+            allStates: null,
+            allPriorities: null,
+            allTypes: null,
+            allUsers: null,
+            selectedStateId: null,
+            selectedPriorityId: null,
+            selectedTypeId: null,
+            selectedAssignedUserId: null
         };
     }
 
@@ -37,14 +53,59 @@ export class TaskDetails extends Component {
                 })
             })
             .catch((e) => console.log(e));
+
+        fetch('http://localhost:8080/task/getPriorities')
+            .then(response => {
+                response.json().then(data => {
+                    this.setState({allPriorities: data});
+                })
+            })
+            .catch((e) => console.log(e));
+
+        fetch('http://localhost:8080/task/getStates')
+            .then(response => {
+                response.json().then(data => {
+                    this.setState({allStates: data});
+                })
+            })
+            .catch((e) => console.log(e));
+
+        fetch('http://localhost:8080/task/getUsers')
+            .then(response => {
+                response.json().then(data => {
+                    this.setState({allUsers: data});
+                })
+            })
+            .catch((e) => console.log(e));
+
+        fetch('http://localhost:8080/task/getTypes')
+            .then(response => {
+                response.json().then(data => {
+                    this.setState({allTypes: data});
+                })
+            })
+            .catch((e) => console.log(e));
     }
 
+    changeType = (e) => {
+        this.setState({selectedTypeId: [e.target.value]});
+        console.log(this.state.selectedTypeId);
+    }
+
+    changeState = (e) => {
+        this.setState({selectedStateId: [e.target.value]});
+    }
+
+    changePriority = (e) => {
+        this.setState({selectedPriorityId: [e.target.value]});
+    }
+
+    changeAssignedUser = (e) => {
+        this.setState({selectedAssignedUserId: [e.target.value]});
+    }
 
     handleChange = (e) => {
         const task = {...this.state.task};
-        console.log(e.target.id);
-        console.log(task);
-        console.log(task[e.target.id]);
         task[e.target.id] = e.target.value;
         this.setState({
             task: task
@@ -54,22 +115,30 @@ export class TaskDetails extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const {email} = this.context;
-        const {projectId, projectName} = this.state;
         const {history} = this.props;
-        fetch('http://localhost:8080/task/update/' + projectId + '/' + projectName + '/' + email).then(response => {
+        const {task, selectedAssignedUserId, selectedPriorityId, selectedStateId, selectedTypeId} = this.state;
+
+        fetch('http://localhost:8080/task/update/' + task.id + '/' + task.name + '/' + task.description + '/' +
+            selectedTypeId + '/' + selectedStateId + '/' + selectedPriorityId + '/' + selectedAssignedUserId + '/' +
+            email
+        ).then(response => {
                 response.json().then(data => {
-                    if(data === true){
-                        history.push({pathname: '/project/index',
-                        });
-                    }
+                    this.setState({task: data});
+                    fetch('http://localhost:8080/task/history/' + data.id)
+                        .then(response => {
+                            response.json().then(data => {
+                                this.setState({taskHistory: data});
+                            })
+                        })
+                        .catch((e) => console.log(e));
                 })
             }
         );
     }
 
     render() {
-        const {task, taskHistory} = this.state;
-        if (task == null)
+        const {task, taskHistory, allStates, allPriorities, allUsers, allTypes} = this.state;
+        if (task == null || allStates == null || allPriorities == null || allUsers == null || allTypes == null)
             return (<div></div>);
         return (
             <div className="container">
@@ -77,41 +146,73 @@ export class TaskDetails extends Component {
                     <h5 className="grey-text text-darken-3">Task details</h5>
                     <div className="divider"></div>
 
-                    <div className="input-field">
-                        <label htmlFor='name'>Task name</label>
-                        <input id='name' type='text' onChange={this.handleChange}
+                    <div className="row">
+                        <label className='col s2'>Task name</label>
+                        <input id='name' type='text' onChange={this.handleChange} className='col s4'
                                value={task.name}/>
                     </div>
 
-                    <div className="input-field">
-                        <label htmlFor='created'>Created</label>
-                        <input id='created' type='text' onChange={this.handleChange}
-                               value={task.created} />
+                    <div className="row">
+                        <label className='col s2'>Created</label>
+                        <input id='created' type='text' onChange={this.handleChange} className='col s4'
+                               value={task.created}/>
                     </div>
 
-                    <div className="input-field">
-                        <label htmlFor='description'>Description</label>
-                        <input id='description' type='text' onChange={this.handleChange}
+                    <div className="row">
+                        <label className='col s2'>Description</label>
+                        <input id='description' type='text' onChange={this.handleChange} className='col s4'
                                value={task.description}/>
                     </div>
 
-                    <div className="input-field">
-                        <label htmlFor='state'>State</label>
-                        <input id='state' type='text' onChange={this.handleChange}
-                               value={task.state.name}/>
+                    <div className="row">
+                        <label className='col s2'>Type</label>
+                        <div className='col s4'>
+                            <select id='type' className='custom-select-sm' onChange={this.changeType}
+                                    value={this.state.task.state.id}>
+                                {this.state.allTypes.map(x => (
+                                    <option value={x.id} key={x.id}>{x.name}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
 
-                    <div className="input-field">
-                        <label htmlFor='priority'>Priority</label>
-                        <input id='priority' type='text' onChange={this.handleChange}
-                               value={task.priority.name}/>
+                    <div className="row">
+                        <label className='col s2'>State</label>
+                        <div className='col s4'>
+                            <select id='state' className='custom-select-sm' onChange={this.changeState}
+                                    value={this.state.task.state.id}>
+                                {this.state.allStates.map(x => (
+                                    <option value={x.id} key={x.id}>{x.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <label className='col s2'>Priority</label>
+                        <div className='col s4'>
+                            <select id='priority' className='custom-select-sm' onChange={this.changePriority}
+                                    className='col s4'
+                                    value={this.state.task.priority.id}>
+                                {this.state.allPriorities.map(x => (
+                                    <option value={x.id} key={x.id}>{x.name}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
 
 
-                    <div className="input-field">
-                        <label htmlFor='assignedUser'>Assigned to</label>
-                        <input id='assignedUser' type='text' onChange={this.handleChange}
-                               value={task.assignedUser.email}/>
+                    <div className="row">
+                        <label className='col s2'>Assigned to</label>
+                        <div className='col s4'>
+                            <select id='assignedUser' className='custom-select-sm' onChange={this.changeAssignedUser}
+                                    className='col s4'
+                                    value={this.state.task.assignedUser.id}>
+                                {this.state.allUsers.map(x => (
+                                    <option value={x.id} key={x.id}>{x.email}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
 
                     <div className="input-field">

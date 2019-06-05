@@ -9,7 +9,7 @@ export class Navbar extends Component {
         return (
             <nav className="grey darken-3">
                 <div className="container nav-wrapper">
-                    <Link to='/' className='brand-logo'> TaskManager </Link>
+                    <Link to='/task/index' className='brand-logo'> TaskManager </Link>
 
                     <UserConsumer>
                         {

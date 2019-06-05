@@ -29,9 +29,11 @@ public class TaskHistory extends DbEntity {
     public TaskHistory() {
     }
 
-    public TaskHistory(String text, Date updated) {
+    public TaskHistory(String text, Date updated, User user,Task task) {
         this.text = text;
         this.updated = updated;
+        this.user = user;
+        this.task = task;
     }
 
     public String getText() {

@@ -11,4 +11,5 @@ public interface TaskRepository extends CrudRepository<Task, Integer> {
     List<Task> findAllByAssignedUserAndProject(User assignedUser, Project project);
     List<Task> findAllByAssignedUser(User assignedUser);
     List<Task> findAllByProject(Project p);
+    Task findById(int id);
 }

@@ -1,15 +1,13 @@
 package cz.ppro.taskmanager.taskamanager.model.user;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import java.util.List;
 
 
 public interface UserRepository extends CrudRepository<User, Integer> {
-    @Transactional(readOnly = true)
-    Collection<User> findAll();
+    List<User> findAll();
     User findByEmail(String email);
     User findByEmailAndPassword(String email,String password);
+    User findById(int id);
 }

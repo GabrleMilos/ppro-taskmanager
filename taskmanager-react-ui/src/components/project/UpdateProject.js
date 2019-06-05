@@ -52,9 +52,9 @@ export class UpdateProject extends Component {
             <div className="container">
                 <form onSubmit={this.handleSubmit} className='white'>
                     <h5 className="grey-text text-darken-3">Update project</h5>
-                    <div className="input-field">
-                        <label htmlFor='projectName'>Project name</label>
-                        <input id='projectName' type='text' onChange={this.handleChange}
+                    <div className="row">
+                        <label className='col s2'>Project name</label>
+                        <input id='projectName' type='text' onChange={this.handleChange} className='col s4'
                                value={this.state.projectName}/>
                     </div>
 

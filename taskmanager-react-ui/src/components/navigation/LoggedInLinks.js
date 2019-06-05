@@ -13,9 +13,6 @@ export class LoggedInLinks extends Component {
                     <NavLink to='/project/index'> Projects </NavLink>
                 </li>
                 <li>
-                    <a onClick={this.handleLogOut}> Log out </a>
-                </li>
-                <li>
                     <UserConsumer>
                         {
                             ({iconText}) => (
@@ -25,6 +22,9 @@ export class LoggedInLinks extends Component {
                             )
                         }
                     </UserConsumer>
+                </li>
+                <li>
+                    <a onClick={this.handleLogOut}> Log out </a>
                 </li>
             </ul>
         );
