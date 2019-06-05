@@ -39,44 +39,86 @@ export class TaskDetails extends Component {
             .catch((e) => console.log(e));
     }
 
+
+    handleChange = (e) => {
+        const task = {...this.state.task};
+        console.log(e.target.id);
+        console.log(task);
+        console.log(task[e.target.id]);
+        task[e.target.id] = e.target.value;
+        this.setState({
+            task: task
+        });
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const {email} = this.context;
+        const {projectId, projectName} = this.state;
+        const {history} = this.props;
+        fetch('http://localhost:8080/task/update/' + projectId + '/' + projectName + '/' + email).then(response => {
+                response.json().then(data => {
+                    if(data === true){
+                        history.push({pathname: '/project/index',
+                        });
+                    }
+                })
+            }
+        );
+    }
+
     render() {
         const {task, taskHistory} = this.state;
         if (task == null)
             return (<div></div>);
         return (
             <div className="container">
-                <h5 className="grey-text text-darken-3">Task details</h5>
+                <form onSubmit={this.handleSubmit} className='white'>
+                    <h5 className="grey-text text-darken-3">Task details</h5>
+                    <div className="divider"></div>
 
-                <div className="divider"></div>
-                <div className="row">
-                    <label className='col s2'>Task name</label>
-                    <p className='col s4'>{task.name} {task.id}</p>
-                </div>
+                    <div className="input-field">
+                        <label htmlFor='name'>Task name</label>
+                        <input id='name' type='text' onChange={this.handleChange}
+                               value={task.name}/>
+                    </div>
 
-                <div className="row">
-                    <label className='col s2'>Description</label>
-                    <p className='col s4'>{task.description}</p>
-                </div>
+                    <div className="input-field">
+                        <label htmlFor='created'>Created</label>
+                        <input id='created' type='text' onChange={this.handleChange}
+                               value={task.created} />
+                    </div>
 
-                <div className="row">
-                    <label className='col s2'>Task state</label>
-                    <p className='col s4'>{task.state.name}</p>
-                </div>
+                    <div className="input-field">
+                        <label htmlFor='description'>Description</label>
+                        <input id='description' type='text' onChange={this.handleChange}
+                               value={task.description}/>
+                    </div>
 
-                <div className="row">
-                    <label className='col s2'>Task priority</label>
-                    <p className='col s4'>{task.priority.name}</p>
-                </div>
+                    <div className="input-field">
+                        <label htmlFor='state'>State</label>
+                        <input id='state' type='text' onChange={this.handleChange}
+                               value={task.state.name}/>
+                    </div>
 
-                <div className="row">
-                    <label className='col s2'>Created</label>
-                    <p className='col s4'>{task.created}</p>
-                </div>
+                    <div className="input-field">
+                        <label htmlFor='priority'>Priority</label>
+                        <input id='priority' type='text' onChange={this.handleChange}
+                               value={task.priority.name}/>
+                    </div>
 
-                <div className="row">
-                    <label className='col s2'>Assigned to</label>
-                    <p className='col s4'>{task.assignedUser.firstName} {task.assignedUser.lastName}</p>
-                </div>
+
+                    <div className="input-field">
+                        <label htmlFor='assignedUser'>Assigned to</label>
+                        <input id='assignedUser' type='text' onChange={this.handleChange}
+                               value={task.assignedUser.email}/>
+                    </div>
+
+                    <div className="input-field">
+                        <button className="btn pink lighten-1 z-depth-0">Update task</button>
+                    </div>
+                </form>
+
 
                 <h5 className="grey-text text-darken-3">Task history</h5>
                 <div className="divider"></div>
