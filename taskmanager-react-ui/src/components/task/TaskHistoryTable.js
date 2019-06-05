@@ -13,7 +13,6 @@ export class TaskHistoryTable extends Component {
             <table className='striped'>
                 <thead>
                 <tr>
-                    <th>Name</th>
                     <th>Text</th>
                     <th>Updated</th>
                     <th>By user</th>
@@ -21,12 +20,11 @@ export class TaskHistoryTable extends Component {
                 </thead>
 
                 <tbody>
-                {taskHistory && taskHistory.map(task =>
+                {taskHistory && taskHistory.map(taskHistory =>
                     <tr key={taskHistory.id}>
-                        <td>{taskHistory.name}</td>
                         <td>{taskHistory.text}</td>
                         <td>{taskHistory.updated}</td>
-                        <td>{taskHistory.user.firstName} {taskHistory.usser.lastName}</td>
+                        <td>{taskHistory.user.firstName} {taskHistory.user.lastName}</td>
                     </tr>
                 )}
 

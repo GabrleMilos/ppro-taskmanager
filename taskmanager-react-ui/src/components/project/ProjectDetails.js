@@ -64,7 +64,7 @@ export class ProjectDetails extends Component {
 
                 <div className='divider'></div>
                 <label className='col s2'>Project tasks</label>
-                <TaskTable tasks={tasks}/>
+                <TaskTable tasks={tasks}{...this.props}/>
 
             </div>
         );

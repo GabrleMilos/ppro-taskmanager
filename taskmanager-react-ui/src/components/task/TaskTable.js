@@ -56,9 +56,9 @@ export class TaskTable extends Component {
                             <button className="btn-small gray z-depth-0"
                                     onClick={() => this.detail(task.id)}>Detail
                             </button>
-                            <button className="btn-small orange z-depth-0"
-                                    onClick={() => this.edit(task.id)}>Edit
-                            </button>
+                            {/*<button className="btn-small orange z-depth-0"*/}
+                            {/*        onClick={() => this.edit(task.id)}>Edit*/}
+                            {/*</button>*/}
                         </td>
                     </tr>
                 )}

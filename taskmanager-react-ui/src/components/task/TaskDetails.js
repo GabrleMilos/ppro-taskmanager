@@ -33,7 +33,7 @@ export class TaskDetails extends Component {
         fetch('http://localhost:8080/task/history/' + taskId)
             .then(response => {
                 response.json().then(data => {
-                    this.setState({tasks: data});
+                    this.setState({taskHistory: data});
                 })
             })
             .catch((e) => console.log(e));
@@ -41,7 +41,7 @@ export class TaskDetails extends Component {
 
     render() {
         const {task, taskHistory} = this.state;
-        if (task == null && taskHistory == null)
+        if (task == null)
             return (<div></div>);
         return (
             <div className="container">
@@ -50,7 +50,7 @@ export class TaskDetails extends Component {
                 <div className="divider"></div>
                 <div className="row">
                     <label className='col s2'>Task name</label>
-                    <p className='col s4'>{task.name}</p>
+                    <p className='col s4'>{task.name} {task.id}</p>
                 </div>
 
                 <div className="row">
@@ -80,7 +80,7 @@ export class TaskDetails extends Component {
 
                 <div className="divider"></div>
                 <h5 className="grey-text text-darken-3">Task history</h5>
-                <TaskHistoryTable {...taskHistory}></TaskHistoryTable>
+                <TaskHistoryTable taskHistory={taskHistory}/>
             </div>
 
         );
