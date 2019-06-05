@@ -8,7 +8,6 @@ import {TaskList} from "./components/task/TaskList"
 import {NewTask} from "./components/task/NewTask";
 import {TaskDetails} from "./components/task/TaskDetails";
 import {NewProject} from "./components/project/NewProject";
-import {UpdateTask} from "./components/task/UpdateTask";
 import {UpdateProject} from "./components/project/UpdateProject";
 import {UserProvider} from "./context/UserContext";
 import ProtectedRoute from './Routes/ProtectedRoute';
@@ -28,7 +27,6 @@ class App extends Component {
                         {/*TASK routes*/}
                         <ProtectedRoute path='/task/index' component={TaskList} {...this.props}/>
                         <ProtectedRoute path='/task/new' component={NewTask} {...this.props}/>
-                        <ProtectedRoute path='/task/update' component={UpdateTask} {...this.props}/>
                         <ProtectedRoute path='/task/detail' component={TaskDetails} {...this.props}/>
                         {/*PROJECT routes*/}
                         <ProtectedRoute path='/project/index' component={ProjectList} {...this.props}/>

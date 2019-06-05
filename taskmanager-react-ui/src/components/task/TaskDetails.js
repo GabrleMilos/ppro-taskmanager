@@ -78,8 +78,8 @@ export class TaskDetails extends Component {
                     <p className='col s4'>{task.assignedUser.firstName} {task.assignedUser.lastName}</p>
                 </div>
 
-                <div className="divider"></div>
                 <h5 className="grey-text text-darken-3">Task history</h5>
+                <div className="divider"></div>
                 <TaskHistoryTable taskHistory={taskHistory}/>
             </div>
 
