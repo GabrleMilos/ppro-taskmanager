@@ -11,10 +11,10 @@ import java.util.Date;
 @Entity
 @Table(name = "task_history")
 public class TaskHistory extends DbEntity {
-    @Column(name = "text")
+    @Column(name = "description")
     private String text;
 
-    @Column(name = "updated")
+    @Column(name = "created")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updated;
 

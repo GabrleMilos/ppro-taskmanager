@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import M from "materialize-css";
 import {UserContext} from "../../context/UserContext";
-import {TaskTable} from "../task/TaskTable";
+import {TaskHistoryTable} from "../task/TaskHistoryTable";
 
 export class TaskDetails extends Component {
     state = {
@@ -41,9 +41,7 @@ export class TaskDetails extends Component {
 
     render() {
         const {task, taskHistory} = this.state;
-        console.log(task);
-        console.log(taskHistory);
-        if (task == null || taskHistory == null)
+        if (task == null && taskHistory == null)
             return (<div></div>);
         return (
             <div className="container">
@@ -56,20 +54,35 @@ export class TaskDetails extends Component {
                 </div>
 
                 <div className="row">
-                    <label className='col s2'></label>
-                    <p className='col s4'></p>
+                    <label className='col s2'>Description</label>
+                    <p className='col s4'>{task.description}</p>
                 </div>
 
                 <div className="row">
-                    <label className='col s2'></label>
-                    <p className='col s4'></p>
+                    <label className='col s2'>Task state</label>
+                    <p className='col s4'>{task.state.name}</p>
+                </div>
+
+                <div className="row">
+                    <label className='col s2'>Task priority</label>
+                    <p className='col s4'>{task.priority.name}</p>
                 </div>
 
                 <div className="row">
                     <label className='col s2'>Created</label>
                     <p className='col s4'>{task.created}</p>
                 </div>
+
+                <div className="row">
+                    <label className='col s2'>Assigned to</label>
+                    <p className='col s4'>{task.assignedUser.firstName} {task.assignedUser.lastName}</p>
+                </div>
+
+                <div className="divider"></div>
+                <h5 className="grey-text text-darken-3">Task history</h5>
+                <TaskHistoryTable {...taskHistory}></TaskHistoryTable>
             </div>
+
         );
     }
 

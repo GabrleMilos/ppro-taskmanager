@@ -35,9 +35,7 @@ public class TaskController {
     public List<TaskHistory> getTaskHistory(@PathVariable Integer taskId) {
         Optional<Task> task = taskRepository.findById(taskId);
         if (task.isPresent()) {
-            List<TaskHistory> t = taskHistoryRepository.findAll();
-            List<TaskHistory> taskHistories = taskHistoryRepository.findAllByTask(task.get());
-            return taskHistories;
+            return taskHistoryRepository.findAllByTask(task.get());
         }
 
         return null;
