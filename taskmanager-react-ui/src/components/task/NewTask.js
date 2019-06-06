@@ -35,7 +35,7 @@ export class NewTask extends Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount(e) {
         M.AutoInit();
         const {projectId} = this.props.location.state;
 
@@ -139,10 +139,9 @@ export class NewTask extends Component {
 
                     <div className="row">
                         <label className='col s2'>Type</label>
-                        <input id='selectedTypeId' type='text' onChange={this.changeType} className='col s4'/>
                         <div className='col s4'>
-                            <select id='type' className='custom-select-sm' onChange={this.changeType}
-                            value={this.state.selectedTypeId}>
+                            <select id='type' className='browser-default' onChange={this.changeType}
+                                    value={this.state.selectedTypeId}>
                                 {allTypes.map(x => (
                                     <option value={x.id} key={x.id}>{x.name}</option>
                                 ))}
@@ -152,9 +151,8 @@ export class NewTask extends Component {
 
                     <div className="row">
                         <label className='col s2'>State</label>
-                        <input id='selectedStateId' type='text' onChange={this.changeState} className='col s4'/>
                         <div className='col s4'>
-                            <select id='state' className='custom-select-sm' onChange={this.changeState}
+                            <select id='state' className='browser-default' onChange={this.changeState}
                                     value={this.state.selectedStateId}>
                                 {allStates.map(x => (
                                     <option value={x.id} key={x.id}>{x.name}</option>
@@ -165,9 +163,8 @@ export class NewTask extends Component {
 
                     <div className="row">
                         <label className='col s2'>Priority</label>
-                        <input id='selectedPriorityId' type='text' onChange={this.changePriority} className='col s4'/>
                         <div className='col s4'>
-                            <select id='priority' className='custom-select-sm' onChange={this.changePriority}
+                            <select id='priority' className='browser-default' onChange={this.changePriority}
                                     value={this.state.selectedPriorityId}>
                                 {allPriorities.map(x => (
                                     <option value={x.id} key={x.id}>{x.name}</option>
@@ -179,9 +176,8 @@ export class NewTask extends Component {
 
                     <div className="row">
                         <label className='col s2'>Assigned to</label>
-                        <input id='selectedAssignedUserId' type='text' onChange={this.changeAssignedUser} className='col s4'/>
                         <div className='col s4'>
-                            <select id='assignedUser' className='custom-select-sm' onChange={this.changeAssignedUser}
+                            <select id='assignedUser' className='browser-default' onChange={this.changeAssignedUser}
                                     value={this.state.selectedAssignedUserId}>
                                 {allUsers.map(x => (
                                     <option value={x.id} key={x.id}>{x.email}</option>
