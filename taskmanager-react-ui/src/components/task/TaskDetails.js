@@ -128,6 +128,7 @@ export class TaskDetails extends Component {
                         .then(response => {
                             response.json().then(data => {
                                 this.setState({taskHistory: data});
+                                M.toast({html: 'Task successfully updated', classes: 'green-text darken-3 white'})
                             })
                         })
                         .catch((e) => console.log(e));
