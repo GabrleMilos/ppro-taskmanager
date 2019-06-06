@@ -46,7 +46,7 @@ public class TaskController {
 
     @CrossOrigin
     @RequestMapping("/task/new/{name}/{description}/{typeId}/{stateId}/{priorityId}/{userId}/{projectId}/{email}")
-    public Task createTask(
+    public boolean createTask(
             @PathVariable String name,
             @PathVariable String description,
             @PathVariable String typeId,
@@ -71,6 +71,10 @@ public class TaskController {
         User assignedUser = userRepository.findById(userIdInt).get();
         Project project = projectRepository.findById(projectIdInt).get();
 
+        if(!project.getManager().getEmail().equals(email)){
+            return false;
+        }
+
         project.getUsersInProject().add(assignedUser);
         projectRepository.save(project);
 
@@ -83,7 +87,7 @@ public class TaskController {
 
         taskRepository.save(task);
         taskHistoryRepository.save(new TaskHistory("User " + user.getEmail() + " created task: " + name, new Date(), user, task));
-        return task;
+        return true;
     }
 
     @CrossOrigin

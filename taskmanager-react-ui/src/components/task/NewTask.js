@@ -108,7 +108,12 @@ export class NewTask extends Component {
             projectId + '/' + email
         ).then(response => {
                 response.json().then(data => {
-                    history.push('/project/index')
+                    if (data === true) {
+
+                        history.push('/project/index')
+                    } else {
+                        M.toast({html: 'Only the manager can add a task to project!', classes: 'red-text darken-3 white'})
+                    }
                 })
             }
         );
