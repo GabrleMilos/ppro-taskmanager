@@ -61,6 +61,7 @@ export class ProjectList extends Component {
     render() {
         const {projects} = this.state;
 
+        console.log(projects);
         return (
             <div className="container">
                 <h5 className="grey-text text-darken-3">Projects</h5>
@@ -92,7 +93,7 @@ export class ProjectList extends Component {
                                     </button>
                                     <button className="btn-small red z-depth-0"
                                             onClick={() => {
-                                                if (window.confirm('Are you sure you wish to delete this item?')) this.delete(project.id)
+                                                if (window.confirm('Are you sure you wish to delete this item? All tasks and its histories will be deleted as well.')) this.delete(project.id)
                                             }}> Delete
                                     </button>
                                 </td>
