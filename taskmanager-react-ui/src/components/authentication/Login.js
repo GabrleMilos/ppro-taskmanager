@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {UserContext} from '../../context/UserContext';
+import M from "materialize-css";
 
 export class Login extends Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        message:''
     };
     handleChange = (e) => {
         this.setState({
@@ -23,7 +25,9 @@ export class Login extends Component {
                 setUser(userInfo);
                 history.push('/task/index');
             })
-            .catch((e) => console.log(e));
+            .catch((e) => {
+                M.toast({html: 'Wrong email or password!', classes: 'red-text darken-3 white'})
+            });
     }
 
     componentDidMount() {
