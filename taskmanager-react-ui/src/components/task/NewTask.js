@@ -1,86 +1,204 @@
 import React, {Component} from 'react';
 import M from "materialize-css";
+import {UserContext} from "../../context/UserContext";
 
 export class NewTask extends Component {
     state = {
-        taskName: '',
-        taskDescription: '',
-        assignedUser: '',
-        taskState: '',
-        taskAssignedUser: '',
-        projectId: '',
-        priorityId: '',
-        users: [{id: 1, name: "User 1"}, {id: 2, name: "User 2"}],
-        states: [{id: 1, name: "New"}, {id: 2, name: "In development"}, {id: 3, name: "Finished"}],
-        priorities: [{id: 1, name: "Immediate"}, {id: 2, name: "Normal"}, {id: 3, name: "Low"}]
+        task: [],
+
+        allStates: [],
+        allPriorities: [],
+        allTypes: [],
+        allUsers: [],
+
+        selectedStateId: '',
+        selectedPriorityId: '',
+        selectedTypeId: '',
+        selectedAssignedUserId: ''
     };
 
+    constructor(props) {
+        super(props);
+        //IMPLEMENT OTHER JUNK HERE
+        this.state = {
+            task: null,
+
+            allStates: null,
+            allPriorities: null,
+            allTypes: null,
+            allUsers: null,
+
+            selectedStateId: 1,
+            selectedPriorityId: 1,
+            selectedTypeId: 1,
+            selectedAssignedUserId: 1
+        };
+    }
+
     componentDidMount() {
-        // Auto initialize all the things!
         M.AutoInit();
+        const {projectId} = this.props.location.state;
+
+        fetch('http://localhost:8080/task/getPriorities')
+            .then(response => {
+                response.json().then(data => {
+                    this.setState({allPriorities: data});
+                })
+            })
+            .catch((e) => console.log(e));
+
+        fetch('http://localhost:8080/task/getStates')
+            .then(response => {
+                response.json().then(data => {
+                    this.setState({allStates: data});
+                })
+            })
+            .catch((e) => console.log(e));
+
+        fetch('http://localhost:8080/task/getUsers')
+            .then(response => {
+                response.json().then(data => {
+                    this.setState({allUsers: data});
+                })
+            })
+            .catch((e) => console.log(e));
+
+        fetch('http://localhost:8080/task/getTypes')
+            .then(response => {
+                response.json().then(data => {
+                    this.setState({allTypes: data});
+                })
+            })
+            .catch((e) => console.log(e));
+    }
+
+    changeType = (e) => {
+        this.setState({selectedTypeId: [e.target.value]});
+    }
+
+    changeState = (e) => {
+        this.setState({selectedStateId: [e.target.value]});
+    }
+
+    changePriority = (e) => {
+        this.setState({selectedPriorityId: [e.target.value]});
+    }
+
+    changeAssignedUser = (e) => {
+        this.setState({selectedAssignedUserId: [e.target.value]});
     }
 
     handleChange = (e) => {
+        const task = {...this.state.task};
+        task[e.target.id] = e.target.value;
         this.setState({
-            [e.target.id]: e.target.value
+            task: task
         });
     }
+
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        const {projectId} = this.props.location.state;
+        const {email} = this.context;
+        const {history} = this.props;
+        const {task, selectedAssignedUserId, selectedPriorityId, selectedStateId, selectedTypeId} = this.state;
+
+        fetch('http://localhost:8080/task/new/' + task.name + '/' + task.description + '/' +
+            selectedTypeId + '/' + selectedStateId + '/' + selectedPriorityId + '/' + selectedAssignedUserId + '/' +
+            projectId + '/' + email
+        ).then(response => {
+                response.json().then(data => {
+                    history.push('/project/index')
+                })
+            }
+        );
     }
 
     render() {
+
+        const {allStates, allPriorities, allUsers, allTypes} = this.state;
+        if (allStates == null || allPriorities == null || allUsers == null || allTypes == null)
+            return (<div></div>);
+
+        console.log(this.state);
         return (
             <div className="container">
                 <form onSubmit={this.handleSubmit} className='white'>
-                    <h5 className="grey-text text-darken-3">Add task</h5>
-                    <div className="input-field">
-                        <label htmlFor='taskName'>Task name</label>
-                        <input id='taskName' type='text' onChange={this.handleChange}/>
-                    </div>
-                    <div className="input-field">
-                        <label htmlFor='taskDescription'>Task description</label>
-                        <input id='taskDescription' type='text' onChange={this.handleChange}/>
+                    <h5 className="grey-text text-darken-3">Task details</h5>
+                    <div className="divider"></div>
+
+                    <div className="row">
+                        <label className='col s2'>Task name</label>
+                        <input id='name' type='text' onChange={this.handleChange} className='col s4'/>
                     </div>
 
+                    <div className="row">
+                        <label className='col s2'>Description</label>
+                        <input id='description' type='text' onChange={this.handleChange} className='col s4'/>
+                    </div>
 
-                    <div className="input-field">
-                        <select id='taskAssignedUser' onChange={this.handleChange}>
-                            <option value="-1">Select user</option>
-                            {this.state.users.map(user => (
-                                <option value={user.id} key={user.id}>{user.name}</option>
-                            ))}
-                        </select>
-                        <label>Assigned user</label>
+                    <div className="row">
+                        <label className='col s2'>Type</label>
+                        <input id='selectedTypeId' type='text' onChange={this.changeType} className='col s4'/>
+                        <div className='col s4'>
+                            <select id='type' className='custom-select-sm' onChange={this.changeType}
+                            value={this.state.selectedTypeId}>
+                                {allTypes.map(x => (
+                                    <option value={x.id} key={x.id}>{x.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <label className='col s2'>State</label>
+                        <input id='selectedStateId' type='text' onChange={this.changeState} className='col s4'/>
+                        <div className='col s4'>
+                            <select id='state' className='custom-select-sm' onChange={this.changeState}
+                                    value={this.state.selectedStateId}>
+                                {allStates.map(x => (
+                                    <option value={x.id} key={x.id}>{x.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <label className='col s2'>Priority</label>
+                        <input id='selectedPriorityId' type='text' onChange={this.changePriority} className='col s4'/>
+                        <div className='col s4'>
+                            <select id='priority' className='custom-select-sm' onChange={this.changePriority}
+                                    value={this.state.selectedPriorityId}>
+                                {allPriorities.map(x => (
+                                    <option value={x.id} key={x.id}>{x.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div className="row">
+                        <label className='col s2'>Assigned to</label>
+                        <input id='selectedAssignedUserId' type='text' onChange={this.changeAssignedUser} className='col s4'/>
+                        <div className='col s4'>
+                            <select id='assignedUser' className='custom-select-sm' onChange={this.changeAssignedUser}
+                                    value={this.state.selectedAssignedUserId}>
+                                {allUsers.map(x => (
+                                    <option value={x.id} key={x.id}>{x.email}</option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
 
                     <div className="input-field">
-                        <select id='taskState' onChange={this.handleChange}>
-                            <option value="-1">Select state</option>
-                            {this.state.states.map(state => (
-                                <option value={state.id} key={state.id}>{state.name}</option>
-                            ))}
-                        </select>
-                        <label>Task state</label>
-                    </div>
-
-                    <div className="input-field">
-                        <select id='taskPriority' onChange={this.handleChange}>
-                            <option value="-1">Select priority</option>
-                            {this.state.priorities.map(priority => (
-                                <option value={priority.id} key={priority.id}>{priority.name}</option>
-                            ))}
-                        </select>
-                        <label>Task state</label>
-                    </div>
-
-
-                    <div className="input-field">
-                        <button className="btn pink lighten-1 z-depth-0">Add task to project</button>
+                        <button className="btn pink lighten-1 z-depth-0">Create task</button>
                     </div>
                 </form>
             </div>
+
         );
     }
+
 }
+
+NewTask.contextType = UserContext;

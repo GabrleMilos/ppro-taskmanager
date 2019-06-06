@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import M from "materialize-css";
 import {UserContext} from "../../context/UserContext";
 import {TaskTable} from "../task/TaskTable";
+import {NavLink} from "react-router-dom";
 
 export class ProjectDetails extends Component {
     state = {
@@ -16,6 +17,15 @@ export class ProjectDetails extends Component {
             project: null,
             tasks: null
         };
+    }
+
+    addTaskToProject = (id) => {
+        const {history} = this.props;
+
+        history.push({
+            pathname: '/task/new/',
+            state: {projectId: id}
+        });
     }
 
     componentDidMount() {
@@ -64,6 +74,9 @@ export class ProjectDetails extends Component {
 
                 <h5 className='col s2'>Project tasks</h5>
                 <div className='divider'></div>
+                <button className="btn-small green z-depth-0" onClick={() => {this.addTaskToProject(project.id)}}>
+                    Create new task in project
+                </button>
                 <TaskTable tasks={tasks}{...this.props}/>
             </div>
         );

@@ -45,6 +45,45 @@ public class TaskController {
     }
 
     @CrossOrigin
+    @RequestMapping("/task/new/{name}/{description}/{typeId}/{stateId}/{priorityId}/{userId}/{projectId}/{email}")
+    public Task createTask(
+            @PathVariable String name,
+            @PathVariable String description,
+            @PathVariable String typeId,
+            @PathVariable String stateId,
+            @PathVariable String priorityId,
+            @PathVariable String projectId,
+            @PathVariable String userId,
+            @PathVariable String email) {
+
+        Task task = new Task(name,description,new Date());
+        User user = userRepository.findByEmail(email);
+
+        Integer typeIdInt = Integer.valueOf(typeId);
+        Integer stateIdInt = Integer.valueOf(stateId);
+        Integer priorityIdInt = Integer.valueOf(priorityId);
+        Integer projectIdInt = Integer.valueOf(projectId);
+        Integer userIdInt = Integer.valueOf(userId);
+
+        TaskType taskType = taskTypeRepository.findById(typeIdInt);
+        TaskState taskState = taskStateRepository.findById(stateIdInt);
+        TaskPriority taskPriority = taskPriorityRepository.findById(priorityIdInt);
+        User assignedUser = userRepository.findById(userIdInt).get();
+        Project project = projectRepository.findById(projectIdInt).get();
+
+        task.setType(taskType);
+        task.setState(taskState);
+        task.setPriority(taskPriority);
+        task.setAssignedUser(assignedUser);
+        task.setProject(project);
+
+
+        taskRepository.save(task);
+        taskHistoryRepository.save(new TaskHistory("User " + user.getEmail() + " created task: " + name, new Date(), user, task));
+        return task;
+    }
+
+    @CrossOrigin
     @RequestMapping("/task/update/{id}/{name}/{description}/{typeId}/{stateId}/{priorityId}/{userId}/{email}")
     public Task updateTask(
             @PathVariable Integer id,

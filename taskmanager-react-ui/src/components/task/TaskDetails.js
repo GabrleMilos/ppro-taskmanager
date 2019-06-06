@@ -169,7 +169,7 @@ export class TaskDetails extends Component {
                         <div className='col s4'>
                             <select id='type' className='custom-select-sm' onChange={this.changeType}
                                     value={this.state.task.state.id}>
-                                {this.state.allTypes.map(x => (
+                                {allTypes.map(x => (
                                     <option value={x.id} key={x.id}>{x.name}</option>
                                 ))}
                             </select>
@@ -181,7 +181,7 @@ export class TaskDetails extends Component {
                         <div className='col s4'>
                             <select id='state' className='custom-select-sm' onChange={this.changeState}
                                     value={this.state.task.state.id}>
-                                {this.state.allStates.map(x => (
+                                {allStates.map(x => (
                                     <option value={x.id} key={x.id}>{x.name}</option>
                                 ))}
                             </select>
@@ -192,9 +192,8 @@ export class TaskDetails extends Component {
                         <label className='col s2'>Priority</label>
                         <div className='col s4'>
                             <select id='priority' className='custom-select-sm' onChange={this.changePriority}
-                                    className='col s4'
                                     value={this.state.task.priority.id}>
-                                {this.state.allPriorities.map(x => (
+                                {allPriorities.map(x => (
                                     <option value={x.id} key={x.id}>{x.name}</option>
                                 ))}
                             </select>
@@ -206,9 +205,8 @@ export class TaskDetails extends Component {
                         <label className='col s2'>Assigned to</label>
                         <div className='col s4'>
                             <select id='assignedUser' className='custom-select-sm' onChange={this.changeAssignedUser}
-                                    className='col s4'
                                     value={this.state.task.assignedUser.id}>
-                                {this.state.allUsers.map(x => (
+                                {allUsers.map(x => (
                                     <option value={x.id} key={x.id}>{x.email}</option>
                                 ))}
                             </select>
