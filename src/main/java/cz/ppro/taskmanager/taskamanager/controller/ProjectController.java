@@ -40,9 +40,12 @@ public class ProjectController {
     }
 
     @CrossOrigin
-    @RequestMapping("/project/delete/{projectId}")
-    public boolean deleteProject(@PathVariable int projectId) {
+    @RequestMapping("/project/delete/{projectId}/{email}")
+    public boolean deleteProject(@PathVariable int projectId,@PathVariable String email) {
         Project project = projectRepository.findById(projectId);
+        if(!project.getManager().getEmail().equals(email)){
+            return false;
+        }
         List<Task> tasks = taskRepository.findAllByProject(project);
         for (Task t : tasks) {
             List<TaskHistory> taskHistories = taskHistoryRepository.findAllByTask(t);

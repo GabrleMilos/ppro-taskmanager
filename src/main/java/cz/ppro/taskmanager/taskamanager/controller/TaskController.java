@@ -71,6 +71,9 @@ public class TaskController {
         User assignedUser = userRepository.findById(userIdInt).get();
         Project project = projectRepository.findById(projectIdInt).get();
 
+        project.getUsersInProject().add(assignedUser);
+        projectRepository.save(project);
+
         task.setType(taskType);
         task.setState(taskState);
         task.setPriority(taskPriority);
@@ -96,6 +99,8 @@ public class TaskController {
             @PathVariable String email) {
         Task task = taskRepository.findById(id).get();
         User user = userRepository.findByEmail(email);
+
+
         if (!name.equals(task.getName())) {
             task.setName(name);
             taskHistoryRepository.save(new TaskHistory("User " + user.getEmail() + " changed the name of task to: " + name, new Date(), user, task));
@@ -132,12 +137,14 @@ public class TaskController {
             Integer userIdInt = Integer.valueOf(userId);
             User assignedUser = userRepository.findById(userIdInt).get();
             if (task.getAssignedUser().getId() != userIdInt) {
+                Project project = task.getProject();
+                project.getUsersInProject().add(assignedUser);
+                projectRepository.save(project);
+
                 task.setAssignedUser(assignedUser);
                 taskHistoryRepository.save(new TaskHistory("User " + user.getEmail() + " changed assighned user to: " + assignedUser.getEmail(), new Date(), user, task));
             }
         }
-
-
         taskRepository.save(task);
         return task;
     }

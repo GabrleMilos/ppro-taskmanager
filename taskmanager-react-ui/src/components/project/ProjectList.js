@@ -46,10 +46,13 @@ export class ProjectList extends Component {
         this.setState({state});
     }
     delete = (id) => {
-        fetch('http://localhost:8080/project/delete/' + id).then(response => {
+        const {email} = this.context;
+        fetch('http://localhost:8080/project/delete/' + id +'/'+ email).then(response => {
                 response.json().then(data => {
                     if (data === true) {
                         this.deleteFromState(id);
+                    }else{
+                        M.toast({html: 'Only the manager can delete a project!', classes: 'red-text darken-3 white'})
                     }
                 }).catch(function (error) {
                     console.log(error);
@@ -60,8 +63,6 @@ export class ProjectList extends Component {
 
     render() {
         const {projects} = this.state;
-
-        console.log(projects);
         return (
             <div className="container">
                 <h5 className="grey-text text-darken-3">Projects</h5>
